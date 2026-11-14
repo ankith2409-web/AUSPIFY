@@ -1,8 +1,8 @@
-# Task 01 - Mobile app wireframes
+# Task 01 — Mobile app wireframes
 
-**Product:** THE SAVIOUR � patient emergency request flow  
+**Product:** THE SAVIOUR · patient emergency request flow  
 **Deliverable:** low fidelity mobile wireframes, navigation map, and a browser based walkthrough  
-**Canvas:** 390 x 844 px
+**Canvas:** 390 × 844 px
 
 [Open the editable Figma wireframes](https://www.figma.com/design/OoIJIHcTxCjIO37I3FHNom)
 
@@ -21,7 +21,7 @@ In a stressful situation, a patient or bystander needs a short path to request a
 | 05 Assigned | Show hospital, ambulance, and ETA | Call ambulance | Remains in tracking state |
 | 06 Failure | State clearly that no request was delivered | Try again or call | 04 Finding help; calling needs production setup |
 
-**Navigation:** `Home  Details  Review  Finding help  Assigned`; failed delivery opens `Failure  Retry`. Review offers a back path to edit the details. The browser walkthrough includes a state switch for the two possible outcomes; it does not contact a real hospital.
+**Navigation:** `Home → Details → Review → Finding help → Assigned`; failed delivery opens `Failure → Retry`. Review offers a back path to edit the details. The browser walkthrough includes a state switch for the two possible outcomes; it does not contact a real hospital.
 
 ## Design decisions
 
