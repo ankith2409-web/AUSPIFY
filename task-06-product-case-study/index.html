@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9f9">
+  <meta name="description" content="THE SAVIOUR — a proposed emergency coordination experience and transparent product design case study.">
+  <title>THE SAVIOUR — Product design case study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="THE SAVIOUR, back to top"><span class="mark" aria-hidden="true">✳</span> THE SAVIOUR</a>
+    <nav aria-label="Case study sections">
+      <a href="#research">Research</a>
+      <a href="#process">Process</a>
+      <a href="#prototype">Prototype</a>
+      <a href="#evaluation">Evaluation</a>
+    </nav>
+    <a class="header-call" href="tel:112" aria-label="Call emergency number 112">Call 112 <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" id="top">
+      <div class="hero-copy">
+        <p class="section-number">PRODUCT DESIGN CASE STUDY / 2026</p>
+        <h1>Clearer handoffs when help is on its way.</h1>
+        <p class="hero-intro">A proposed patient experience that makes the status of an emergency request explicit—from draft, to delivered, to accepted, to ambulance dispatch.</p>
+        <div class="hero-actions"><a class="primary-link" href="#prototype">Explore the prototype <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#research">Read the research</a></div>
+        <p class="disclosure">Concept prototype. No request is sent to hospitals, ambulances, police, or 112.</p>
+      </div>
+      <div class="hero-preview" aria-label="Preview of the patient app">
+        <div class="mini-phone" aria-hidden="true">
+          <div class="mini-top">THE SAVIOUR <span>10:24</span></div>
+          <h2>Get help now</h2><p>Know what is happening at every step.</p>
+          <div class="mini-location"><span class="pin">⌖</span><span><strong>KR Puram, Bengaluru</strong><small>Pickup location</small></span></div>
+          <div class="mini-options"><div><span class="option-icon">+</span><strong>Medical emergency</strong><span class="option-check">●</span></div><div><span class="option-icon">↗</span><strong>Road accident</strong><span>○</span></div></div>
+          <div class="mini-cta">Continue request</div><div class="mini-call">Call 112 instead</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="context-band">
+      <div class="shell context-grid">
+        <div><span>01 / CHALLENGE</span><p>People in distress need certainty about whether a request reached anyone.</p></div>
+        <div><span>02 / DESIGN RESPONSE</span><p>Use plain-language states and a visible call alternative at each critical point.</p></div>
+        <div><span>03 / SCOPE</span><p>Patient-facing concept. Dispatch, clinical triage, and police coordination require institutional integration.</p></div>
+      </div>
+    </section>
+
+    <section class="section shell" id="research">
+      <div class="section-heading"><p class="section-number">01 / DISCOVERY</p><h2>Start with the service that already exists.</h2></div>
+      <div class="research-layout">
+        <p class="lead">India’s 112 Emergency Response Support System already accepts requests across channels and supports dispatch. The 112 India app also describes status tracking. A new concept cannot honestly claim to invent those capabilities. The useful design question is how to make handoff states easier to understand and recover from.</p>
+        <div class="research-table-wrap"><table>
+          <caption>Secondary research, reviewed November 2026</caption>
+          <thead><tr><th>Existing service</th><th>Verified capability</th><th>Design implication</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">ERSS 112</th><td>Unified emergency intake and routing to relevant dispatchers.</td><td>Keep 112 as the direct, reliable fallback; integration needs authorization.</td></tr>
+            <tr><th scope="row">112 India app</th><td>Location sharing, emergency categories, and request status tracking are described.</td><td>Do not present these as unique inventions. Explore clearer delivery and handoff language.</td></tr>
+            <tr><th scope="row">National Ambulance Service</th><td>108 is used for critical care, trauma, and accidents; 102 is largely patient transport.</td><td>Respect existing service pathways rather than implying a parallel ambulance network.</td></tr>
+            <tr><th scope="row">RapidSOS <small>(adjacent, US)</small></th><td>Connects device and incident data to public safety systems.</td><td>Data integration is an institutional partnership, not a feature a UI alone can deliver.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <p class="source-line">Sources: <a href="https://www.mha.gov.in/emergency-response-support-system-erss" target="_blank" rel="noopener noreferrer">Ministry of Home Affairs / ERSS</a>, <a href="https://play.google.com/store/apps/details?id=in.cdac.ners.psa.mobile.android.national" target="_blank" rel="noopener noreferrer">112 India app listing</a>, <a href="https://nhm.gov.in/nhm_live/index1.php?lang=1&amp;level=2&amp;lid=189&amp;sublinkid=1217" target="_blank" rel="noopener noreferrer">National Health Mission / ambulance services</a>, <a href="https://developer.rapidsos.com/public_safety/default/how-to-integrate-with-rapid-sos-portal" target="_blank" rel="noopener noreferrer">RapidSOS developer documentation</a>.</p>
+    </section>
+
+    <section class="section muted-section" id="process">
+      <div class="shell">
+        <div class="section-heading"><p class="section-number">02 / FRAMING</p><h2>Design for uncertainty, not an imaginary perfect network.</h2></div>
+        <div class="process-grid">
+          <article><span class="process-index">A</span><h3>Who this is for</h3><p>A patient or bystander on a phone, possibly stressed, outdoors, or on an unreliable connection. This is a design assumption, not a researched persona from interviews.</p></article>
+          <article><span class="process-index">B</span><h3>What they need</h3><p>A short request, confidence that it was delivered, the identity of whoever accepted it, and an unambiguous alternative when it fails or no provider responds.</p></article>
+          <article><span class="process-index">C</span><h3>What the interface must say</h3><p>“Not sent,” “sent and waiting,” and “accepted” are separate states. No estimated arrival appears before assignment. Sample hospital details are marked as simulation.</p></article>
+        </div>
+        <div class="journey">
+          <h3>Patient journey</h3>
+          <ol><li><strong>Locate</strong><span>Confirm the pickup point.</span></li><li><strong>Describe</strong><span>Choose a category and add contact details.</span></li><li><strong>Review</strong><span>Check before sending.</span></li><li><strong>Wait</strong><span>See delivery and acceptance status.</span></li><li><strong>Act</strong><span>Track the proposed handoff or call 112.</span></li></ol>
+        </div>
+        <p class="wireframe-link">The low fidelity exploration is in <a href="https://www.figma.com/design/OoIJIHcTxCjIO37I3FHNom" target="_blank" rel="noopener noreferrer">Task 1’s editable wireframes ↗</a>. The interactive screens below refine its status and failure branches.</p>
+      </div>
+    </section>
+
+    <section class="section shell" id="prototype">
+      <div class="section-heading"><p class="section-number">03 / SOLUTION</p><h2>Try the handoff journey.</h2><p class="section-description">The controls work locally in your browser. Use the reviewer controls to simulate delivery, hospital acceptance, or a lack of response. No data leaves this page.</p></div>
+      <div class="prototype-layout">
+        <aside class="prototype-guide">
+          <p class="guide-heading">JOURNEY MAP</p>
+          <ol id="screen-nav" aria-label="Prototype screens"></ol>
+          <div class="guide-note"><strong>What this proves</strong><p>The prototype demonstrates interface states and navigation. It does not prove response time, hospital availability, or real dispatch.</p></div>
+        </aside>
+        <div class="phone-stage"><div class="phone" role="region" aria-label="Interactive mobile app prototype">
+          <div class="phone-status" aria-hidden="true"><span>10:24</span><span>●●●  4G  ▰</span></div>
+          <div id="app" class="app-screen" aria-live="polite"></div>
+        </div></div>
+        <aside class="design-notes">
+          <p class="guide-heading">INTERACTION NOTES</p>
+          <div><span>01</span><p>Location stays editable. The interface never claims that a live GPS fix was obtained.</p></div>
+          <div><span>02</span><p>Review is the boundary between draft and an attempted send.</p></div>
+          <div><span>03</span><p>Hospital acceptance and ambulance details appear only in a marked simulation.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section design-section">
+      <div class="shell design-layout">
+        <div><p class="section-number">04 / DESIGN SYSTEM</p><h2>Calm structure. Urgent action.</h2><p class="lead">The visual system reserves red for the main request action. Navy carries readable text; teal marks information and selection. Status uses words as well as color, so an error is never communicated by a red dot alone.</p></div>
+        <div class="tokens">
+          <div class="swatches"><div><i style="background:#102c3a"></i><span>Ink<br>#102C3A</span></div><div><i style="background:#c63f3f"></i><span>Action<br>#C63F3F</span></div><div><i style="background:#087b78"></i><span>Signal<br>#087B78</span></div><div><i style="background:#f7f9f9"></i><span>Canvas<br>#F7F9F9</span></div></div>
+          <p><strong>Typography</strong> System sans, 16 px body minimum in the app, 24–31 px mobile titles. <strong>Controls</strong> 48 px minimum tap target, strong focus outlines, plain labels. <strong>Layout</strong> 8 px spacing rhythm, responsive two-column case study, single-column mobile app.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="evaluation">
+      <div class="section-heading"><p class="section-number">05 / EVALUATION</p><h2>What was checked—and what remains unproven.</h2></div>
+      <div class="evaluation-grid">
+        <div><h3>Verified in this prototype</h3><ul><li>All visible controls have a defined response.</li><li>Keyboard focus, form labels, and status text are present.</li><li>Review, delivered, accepted, failed send, and no-response states are distinct.</li><li>The layout adapts to narrow screens and desktop.</li></ul></div>
+        <div><h3>Needed before a real product</h3><ul><li>Interviews and observed usability sessions with diverse users.</li><li>Partnerships, contracts, and verified dispatch integration.</li><li>Privacy, security, consent, and data retention review.</li><li>Device testing, screen reader testing, and unreliable-network trials.</li></ul></div>
+      </div>
+      <p class="closing">Outcome: a reviewable concept and working UI prototype. No user research findings, clinical outcomes, or real emergency response improvements are claimed.</p>
+    </section>
+  </main>
+  <footer class="site-footer shell"><span>THE SAVIOUR / PRODUCT DESIGN CONCEPT</span><a href="#top">Back to top ↑</a><span>For an actual emergency in India, call <a href="tel:112">112</a>.</span></footer>
+</body>
+</html>
+
