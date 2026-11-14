@@ -2,13 +2,21 @@
 
 **Product:** THE SAVIOUR  
 **Scope:** Patient-facing emergency coordination concept for India  
-**Deliverables:** Research, assumptions, user journey, low fidelity exploration, high fidelity responsive screens, interactive prototype, design system, and evaluation record
+**Deliverables:** Working local three-role demo, research, assumptions, user journey, low fidelity exploration, high fidelity screens, design system, and evaluation record
 
 ## Open the project
 
-Open [index.html](index.html) in a modern browser. No build tool, package install, API key, or account is needed. The interactive prototype is embedded in the case study. Its reviewer controls simulate the possible outcomes. Run the state tests with `node --test tests/flow.test.mjs`.
+Open [index.html](index.html) for the working demo. Open [case-study.html](case-study.html) for the design process and the earlier patient screen prototype. No package install, API key, or account is needed. Use a local server for reliable multi-tab behavior:
 
-**This is not an emergency service.** The page never sends a request, reads live location, connects to a hospital, assigns a vehicle, or informs traffic police. For a real emergency in India, the interface provides a direct `tel:112` link.
+```powershell
+python -m http.server 8765 --directory "C:\Users\akith\AUSPIFY\task-06-product-case-study"
+```
+
+Then open `http://localhost:8765/`. Open the page in three tabs, choose a different role in each, and submit a **sample** request. The hospital can accept and dispatch it; traffic control can acknowledge the route; the patient sees those updates. State syncs across tabs in the same browser through local storage, not across devices.
+
+Run both state test files with `node --test tests/flow.test.mjs tests/model.test.cjs`.
+
+**This is not an emergency service.** The demo writes only to local browser storage. It never sends a request, reads live location, connects to a hospital, assigns a vehicle, or informs traffic police. Do not enter real emergency or personal information. For a real emergency in India, the interface provides a direct `tel:112` link.
 
 ## Problem and opportunity
 
@@ -43,7 +51,7 @@ flowchart TD
     G --> H["Call 112"]
 ```
 
-**Critical distinction:** “Not sent” means no delivery confirmation. “Sent / waiting” means a receiving service acknowledged delivery, but no provider has accepted. “Assigned” requires a verified acceptance. The prototype simulates these states and labels them as such.
+**Critical distinction:** In the case-study prototype, "Not sent" means no delivery confirmation, "Sent / waiting" means delivery acknowledged but no provider accepted, and "Assigned" requires verified acceptance. The main three-role demo uses a different, explicitly local state model: created → hospital accepted → ambulance marked en route → traffic acknowledged → arrived. Its labels describe actions in this browser, never actual service delivery.
 
 The patient journey emphasizes fewer fields and a call alternative. The bystander journey emphasizes an editable pickup location and contact number. Both converge at review and the same explicit handoff states.
 
@@ -67,13 +75,13 @@ The phone UI uses semantic buttons, labelled fields, status text, and a persiste
 
 | Evaluation criterion | Evidence in this branch | Result |
 | --- | --- | --- |
-| Task completion | Research, assumptions, journey, wireframes link, high fidelity app screens, prototype, case study | Complete as a concept |
-| Code quality | Separate HTML, CSS, and JS; small view functions; escaped user text; no dependencies | Syntax checked; needs peer review |
+| Task completion | Research, assumptions, journey, wireframes link, responsive high fidelity app, three-role demo, case study | Complete as a design concept and local working model |
+| Code quality | Separate demo model and UI, HTML/CSS/JS; escaped user text; no runtime dependencies | State tests pass; peer review pending |
 | Website responsiveness | Desktop layout, tablet breakpoint, narrow phone layout | CSS implemented; browser visual QA pending |
 | User interface design | Type scale, color tokens, spacing, states, focus style, tap targets | Design review complete; real usability untested |
-| Creativity and implementation | Explicit handoff state model and failure recovery | Implemented as local simulation |
+| Creativity and implementation | Visible patient–hospital–traffic handoff and distinct failed-send/no-response concepts | Multi-role demo works locally; no real integration |
 | Professional presentation | Case study narrative, sources, constraints, linked wireframes | Complete |
-| Project functionality | Category choice, form validation, edit and review, all simulated outcome branches | Logic checked; no backend integration |
+| Project functionality | Submit, accept, dispatch, route acknowledgement, arrival, clear, and same-browser tab sync; separate patient prototype covers send failure | State tests pass; no backend integration |
 | Submission process | Source files, branch link, screenshots, optional video | Source and branch available; screenshots/video pending |
 
 ### Next validation before a real service
@@ -82,7 +90,7 @@ The phone UI uses semantic buttons, labelled fields, status text, and a persiste
 - Test screen readers, small devices, offline conditions, intermittent delivery, and delayed provider responses.
 - Define delivery acknowledgements, timeout escalation, duplicate request handling, and safe retry semantics with actual dispatch partners.
 - Review consent, security, privacy, data retention, and institutional authorization.
-- Replace all sample hospital, vehicle, and ETA content with verified response data.
+- Replace all sample hospital, vehicle, and ETA content with verified response data. Build authenticated roles and an authorized backend before any real use.
 
 **Outcome:** A working, reviewable UI concept and a documented research-informed design hypothesis. It does not establish improved response times or real emergency outcomes.
 
