@@ -27,21 +27,21 @@ In a stressful situation, a patient or bystander needs a short path to request a
 | --- | --- | --- | --- |
 | 01 Home | Confirm location and start | Request ambulance | 02 Details |
 | 02 Details | Collect essential request information | Review request | 03 Review |
-| 03 Review | Check information before sending | Send emergency request | 04 Finding help |
-| 04 Finding help | Show request status and next steps | Wait, or call emergency services | 05 Assigned or 06 Failure |
+| 03 Review | Check information before sending | Send emergency request | 04 Finding help if delivered; 06 Failure if sending fails |
+| 04 Finding help | Show delivered request status and next steps | Wait, or call emergency services | 05 Assigned |
 | 05 Assigned | Show hospital, ambulance, and ETA | Call ambulance | Remains in tracking state |
 | 06 Failure | State clearly that no request was delivered | Try again or call | 04 Finding help; calling needs production setup |
 
-**Navigation:** `Home → Details → Review → Finding help → Assigned`; failed delivery opens `Failure → Retry`. Review offers a back path to edit the details. The browser walkthrough includes a state switch for the two possible outcomes; it does not contact a real hospital.
+**Navigation:** `Home → Details → Review → Finding help → Assigned`; a failed send goes from Review to `Failure → Retry`. Review offers a back path to edit the details. The browser walkthrough lets a reviewer simulate both send outcomes; it does not contact a real hospital.
 
 ```mermaid
 flowchart TD
     A["Home / location"] --> B["Request details"]
     B --> C["Review"]
     C -->|Edit| B
-    C -->|Send| D["Finding help"]
+    C -->|Delivered| D["Finding help"]
+    C -->|Send failed| F["Request not sent"]
     D -->|Hospital accepts| E["Ambulance assigned"]
-    D -->|Delivery fails| F["Request not sent"]
     F -->|Retry, details retained| D
 ```
 
