@@ -1,63 +1,41 @@
-# Task 05 — E-commerce app UI/UX design
+# Task 5 — Form & Field
 
-**Form & Field** is a fictional home objects store. Open `index.html` directly or serve this folder with `python -m http.server 8766`. The catalog, detail page, bag, checkout, and confirmation are interactive. Bag quantities persist in local browser storage; checkout does not transmit data or take payment.
+A fictional homeware shopping prototype: browse, filter, inspect an object, edit a bag and try checkout using sample details.
 
-## Design intent
+[Live prototype](https://auspify-task-05.vercel.app/) · [Wireframes](wireframes.svg) · [Design record](DESIGN.md) · [Evaluation](EVALUATION.md) · [Participant protocol](USABILITY-TEST.md)
 
-The brief asks for an optimized shopping experience. The central question is: can a shopper find a suitable object, understand its details and total cost, adjust their bag, and finish a short checkout without uncertainty? The editorial visual system uses a restrained olive accent, warm paper canvas, serif display type, generous product imagery, and explicit controls. Product names, prices, materials, dimensions, and delivery terms are illustrative, not real inventory.
+**Client verdict, 16 November 2026:** reviewable design and working prototype. The task is not fully complete against the brief: participant usability testing has not been conducted. Sessions completed: **0**. Internal browser QA is not participant research.
 
-## Workflow evidence
+## Brief coverage
 
-| Brief step | Deliverable | Status |
+Reference: page 10 of `UI_UX DEVELOPMENT TASK LIST(1).pdf`; shared evaluation criteria and submission instructions on page 12.
+
+| Required workflow | Evidence | Status |
 | --- | --- | --- |
-| 1. User journeys and wireframes | Journey and screen maps below | Conceptual; no participant research |
-| 2. Listing and detail screens | Category filtering, price sorting, six products, dedicated detail views | Built |
-| 3. Cart and checkout | Adjustable quantities, remove, subtotal, shipping, total, labelled address form, validation, sample confirmation | Built |
-| 4. Interactive prototype | Responsive browser app with back navigation, local bag persistence, clear empty and error states | Built |
-| 5. Usability testing | Internal task walkthrough and code checks below | Formal testing with participants pending |
+| User journeys and wireframes | DESIGN.md journey/recovery map; editable original wireframes.svg | Delivered |
+| Listing and detail screens | Six products; original vector illustrations, filters, sorting and specifications | Delivered |
+| Cart and checkout | Quantity/removal, totals, shipping rule, validation and explicit sample confirmation | Delivered |
+| Interactive prototypes | Original HTML, CSS and JavaScript, deployed on Vercel | Delivered |
+| Conduct usability testing | Ready-to-run USABILITY-TEST.md and empty participant-results.csv | **Actual sessions pending** |
 
-### Hypothesis journey
+## Review the flow
 
-1. **Discover:** Enter the shop, scan the assortment, filter by category or sort by price.
-2. **Evaluate:** Open a product to inspect price, material, dimensions, and description.
-3. **Decide:** Add to bag, revise quantities, or remove an item. See shipping and total before checkout.
-4. **Complete:** Enter contact and delivery fields, see validation, then reach an unmistakably simulated confirmation.
+1. Filter to Decor and sort by price. Open Glass Vase through its image.
+2. Add it to the bag; adjust quantity and remove it to inspect recovery.
+3. Add an object again, continue to checkout and submit empty fields.
+4. Enter sample details, go back to Bag and return. Entries remain in page memory.
+5. Submit valid sample details. The confirmation states that no actual order or payment occurred.
 
-This is a design hypothesis, not a measured user journey. A real study should recruit shoppers with varying device sizes and assistive technology needs.
+The bag persists in browser storage. Checkout details stay only in page memory and clear on confirmation or refresh. No payment, inventory, account or fulfilment service is connected. USD prices, delivery terms and country choices are illustrative.
 
-### Low fidelity screen map
+## Run locally
 
-```mermaid
-flowchart TD
-  A["Catalog: headline / filters / products"] --> B["Detail: media / specs / add"]
-  A --> C["Bag: items / quantity / total"]
-  B --> C
-  C -->|Empty| A
-  C --> D["Checkout: contact / address / summary"]
-  D -->|Invalid| D
-  D --> E["Sample confirmation"]
-  E --> A
+With Node.js installed, from the repository root:
+
+```sh
+npx --yes serve task-05-ecommerce-app -l 8765
 ```
 
-Wireframe content order: catalog header → category controls → product grid; detail image → name/price → description/specifications → add; bag line items → quantity/remove → cost summary; checkout form → cost summary → action. The final screens preserve that structure at mobile and desktop widths.
+Open `http://localhost:8765`. From this folder, serve `.` instead. There is no build step or project dependency installation. This avoids relying on the Windows `py` launcher.
 
-## Evaluation against internship criteria
-
-| Criterion | Evidence and limitation |
-| --- | --- |
-| Task completion | All five workflow steps represented; participant testing remains outstanding. |
-| Code quality | Plain HTML, CSS, and JavaScript with product data separated from render functions; no build dependencies. |
-| Responsiveness | Three-to-two-to-one column behavior, fluid typography, stacked checkout and detail layouts; browser visual testing pending. |
-| UI design | Consistent typography, color, spacing, image treatment, focus indicators, labels, and feedback. |
-| Creativity and implementation | Deliberate editorial art direction with original vector product illustrations. |
-| Professional presentation | Documented user path, wireframe order, visual rationale, and limitations. |
-| Functionality | Filter, sort, detail, add, quantity, removal, total, form validation, confirmation, persistence. No real inventory, payment, fulfillment, or account. |
-
-## Test protocol and outcomes
-
-The JavaScript passes `node --check app.js`. An internal task walkthrough should cover: filter to Decor; sort low to high; open Glass Vase; add twice; decrease and remove in the bag; add Oak Side Table; complete checkout; leave required fields empty to trigger validation; complete valid fields; verify that the bag clears and the confirmation states no order was placed. Repeat at 375 px and 1280 px, with keyboard only and a screen reader. **No external participants have completed this protocol yet.** Do not present the concept as a validated commercial store.
-
-## Submission
-
-Source files are in this folder. Capture desktop and mobile screenshots after browser QA. A demo video is optional under the internship brief.
-
+Source, editable SVG wireframes and real completed-screen screenshots are included for submission. The brief discusses design tools but does not require an exclusive export format. EVALUATION.md maps all seven criteria to actual evidence and remaining gaps; no inaccessible Figma file is claimed as verified.

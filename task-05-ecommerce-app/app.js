@@ -18,25 +18,170 @@ clock:`<ellipse cx="300" cy="224" rx="143" ry="143" fill="#9b6a41"/><circle cx="
 vase:`<ellipse cx="300" cy="354" rx="143" ry="17" fill="#b5a99c" opacity=".3"/><path d="M269 151v44q-86 41-77 96 4 63 108 65 104-2 108-65 9-55-77-96v-44z" fill="#aab49b" opacity=".65" stroke="#687b66" stroke-width="5"/><ellipse cx="300" cy="151" rx="31" ry="8" fill="#c9c9ab" stroke="#687b66" stroke-width="4"/><path d="M300 284q-8-110-60-189M300 285q38-105 83-187M301 278q-16-112 7-212" fill="none" stroke="#67774d" stroke-width="5"/><path d="M245 148q-50-15-57-49 39-2 57 49M352 154q43-22 47-58-35 5-47 58M286 115q-15-32-49-44 5 36 49 44M325 117q8-43 41-58-4 37-41 58" fill="#687749"/>`
 };
 const visual=p=>`<div class="product-visual" role="img" aria-label="Illustration of ${p.name}"><svg viewBox="0 0 600 420" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="600" height="420" fill="#e9dfd3"/><path d="M0 345h600" stroke="#d2c4b5" stroke-width="3"/>${art[p.id]}</svg></div>`;
-const readCart=()=>{try{const value=JSON.parse(localStorage.getItem('form-field-cart-v1'));return value&&typeof value==='object'&&!Array.isArray(value)?Object.fromEntries(Object.entries(value).filter(([id,q])=>products.some(p=>p.id===id)&&Number.isInteger(q)&&q>0&&q<=99)):{} }catch{return {}}};
-let cart=readCart(),filter='All objects',sort='featured';
-const lines=()=>products.filter(p=>cart[p.id]).map(p=>({...p,qty:cart[p.id]}));
-const count=()=>Object.values(cart).reduce((a,b)=>a+b,0);
-const subtotal=()=>lines().reduce((a,p)=>a+p.price*p.qty,0);
-function save(){localStorage.setItem('form-field-cart-v1',JSON.stringify(cart));document.querySelector('#bag-count').textContent=count();document.querySelector('#cart-button').setAttribute('aria-label',`Open bag, ${count()} items`)}
-function announce(s){document.querySelector('#live').textContent=s}
-function add(id){cart[id]=Math.min(99,(cart[id]||0)+1);save();announce(`${products.find(p=>p.id===id).name} added to bag`)}
-function renderShop(){let shown=products.filter(p=>filter==='All objects'||p.category===filter);if(sort==='price-low')shown.sort((a,b)=>a.price-b.price);if(sort==='price-high')shown.sort((a,b)=>b.price-a.price);main.innerHTML=`<div class="container"><section class="hero"><h1>Objects for the everyday</h1><p>Considered home objects for modern living—timeless in form, useful in daily life.</p></section><div class="toolbar"><div class="filters" role="group" aria-label="Filter products">${categories.map(c=>`<button type="button" class="filter" data-filter="${c}" aria-pressed="${filter===c}">${c}</button>`).join('')}</div><label class="sort">Sort <select id="sort"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label></div><p class="results">${shown.length} objects</p><section class="grid" aria-label="Products">${shown.map(p=>`<article>${visual(p)}<div class="product-meta"><h2><a href="#/product/${p.id}">${p.name}</a></h2><span class="price">${money(p.price)}</span><p>${p.category}</p></div><div class="product-actions"><button class="solid-button" data-add="${p.id}">Add to bag</button><a class="text-button" href="#/product/${p.id}">View details</a></div></article>`).join('')}</section></div>`;document.querySelector('#sort').value=sort}
-function renderDetail(id){const p=products.find(x=>x.id===id);if(!p)return renderNotFound();main.innerHTML=`<div class="container"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span>${p.category}</div><article class="detail">${visual(p)}<div class="detail-copy"><span class="eyeline">${p.category} / Form & Field</span><h1>${p.name}</h1><p class="detail-price">${money(p.price)}</p><p class="detail-description">${p.description}</p><div class="specs"><div><strong>Material</strong>${p.material}</div><div><strong>Size</strong>${p.size}</div></div><button class="solid-button" data-add="${p.id}">Add to bag — ${money(p.price)}</button><p class="minor">Concept catalog. Product specifications and availability are illustrative.</p></div></article></div>`}
-function summary(checkout=false){const sub=subtotal(),shipping=sub>=300?0:18;return `<aside class="summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal · ${count()} ${count()===1?'item':'items'}</span><strong>${money(sub)}</strong></div><div class="summary-row"><span>Shipping</span><span>${shipping?money(shipping):'Complimentary'}</span></div><div class="summary-row total"><span>Total</span><span>${money(sub+shipping)}</span></div>${checkout?'':`<a class="solid-button" href="#/checkout">Continue to checkout</a>`}<p class="minor">Illustrative prices in USD. No payment is taken.</p></aside>`}
-function renderCart(){const items=lines();main.innerHTML=`<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span>Bag</div><h1 class="page-title">Your bag <span style="font-size:.42em;vertical-align:middle">(${count()})</span></h1>${items.length?`<div class="cart-layout"><div>${items.map(p=>`<article class="cart-item">${visual(p)}<div><h2><a href="#/product/${p.id}">${p.name}</a></h2><p>${p.material}</p><div class="qty" aria-label="Quantity for ${p.name}"><button aria-label="Decrease ${p.name} quantity" data-qty="${p.id}" data-delta="-1">−</button><span>${p.qty}</span><button aria-label="Increase ${p.name} quantity" data-qty="${p.id}" data-delta="1">+</button></div><button class="remove" data-remove="${p.id}">Remove</button></div><span class="price">${money(p.price*p.qty)}</span></article>`).join('')}</div>${summary()}</div>`:`<div class="empty"><h2>Your bag is empty.</h2><p class="page-intro">Good things take time to find. Explore the collection.</p><a class="solid-button" href="#/">Browse objects</a></div>`}</div>`}
-function renderCheckout(){if(!count()){location.hash='#/cart';return}main.innerHTML=`<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span><a href="#/cart">Bag</a><span>/</span>Checkout</div><h1 class="page-title">Checkout</h1><p class="page-intro">A short, clear path from bag to confirmation.</p><div class="checkout-layout"><form id="checkout-form" novalidate><section class="form-section"><h2>Contact</h2><div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required></div></section><section class="form-section"><h2>Delivery address</h2><div class="field-grid"><div class="field"><label for="first">First name</label><input id="first" name="first" autocomplete="given-name" required></div><div class="field"><label for="last">Last name</label><input id="last" name="last" autocomplete="family-name" required></div></div><div class="field"><label for="address">Street address</label><input id="address" name="address" autocomplete="street-address" required></div><div class="field-grid"><div class="field"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" required></div><div class="field"><label for="postal">Postal code</label><input id="postal" name="postal" autocomplete="postal-code" required></div></div><div class="field"><label for="country">Country</label><select id="country" name="country" required><option value="">Select country</option><option>India</option><option>United States</option><option>United Kingdom</option></select></div></section><div class="notice">Prototype checkout. No payment details are requested. Submitting shows a sample confirmation; no order is placed and no address is sent to a server.</div><p class="form-error" id="form-error" role="alert" hidden></p><button class="solid-button" type="submit">Review sample confirmation</button></form>${summary(true)}</div></div>`}
-function renderSuccess(){main.innerHTML=`<section class="success"><span class="mark" aria-hidden="true">✳</span><h1>Thank you for exploring.</h1><p>This is a sample confirmation, not an order. No payment was processed and no delivery was arranged.</p><a class="solid-button" href="#/">Back to the collection</a></section>`}
-function renderAbout(){main.innerHTML=`<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span>About</div><h1 class="page-title">Less, but better.</h1><p class="page-intro" style="max-width:620px;font-size:18px">Form & Field is a fictional store created to explore a calm, accessible shopping journey. Its products, prices, and delivery terms are illustrative. This prototype keeps the experience focused on discovery, product understanding, a reversible bag, and an honest checkout simulation.</p><a class="solid-button" style="display:inline-block;margin-top:25px" href="#/">Explore the collection</a></div>`}
-function renderNotFound(){main.innerHTML=`<div class="page empty"><h1 class="page-title">Page not found.</h1><a class="solid-button" href="#/">Back to shop</a></div>`}
-function route(){const path=location.hash.slice(1)||'/';if(path==='/')renderShop();else if(path.startsWith('/product/'))renderDetail(path.split('/')[2]);else if(path==='/cart')renderCart();else if(path==='/checkout')renderCheckout();else if(path==='/complete')renderSuccess();else if(path==='/about')renderAbout();else renderNotFound();save();scrollTo({top:0,behavior:'instant'});main.focus({preventScroll:true})}
-document.addEventListener('click',e=>{const button=e.target.closest('button');if(!button)return;if(button.id==='cart-button'){location.hash='#/cart';return}if(button.dataset.filter){filter=button.dataset.filter;renderShop();return}if(button.dataset.add){add(button.dataset.add);const old=button.textContent;button.textContent='Added to bag';setTimeout(()=>{if(button.isConnected)button.textContent=old},1200);return}if(button.dataset.qty){const id=button.dataset.qty;cart[id]=Math.min(99,(cart[id]||0)+Number(button.dataset.delta));if(cart[id]<1)delete cart[id];save();renderCart();return}if(button.dataset.remove){delete cart[button.dataset.remove];save();renderCart();announce('Item removed from bag')}});
-document.addEventListener('change',e=>{if(e.target.id==='sort'){sort=e.target.value;renderShop()}});
-document.addEventListener('submit',e=>{if(e.target.id!=='checkout-form')return;e.preventDefault();const form=e.target,err=document.querySelector('#form-error');if(!form.checkValidity()){err.hidden=false;err.textContent='Please complete the highlighted fields with a valid email address.';form.reportValidity();return}cart={};save();location.hash='#/complete'});
-addEventListener('hashchange',route);addEventListener('storage',e=>{if(e.key==='form-field-cart-v1'){cart=readCart();route()}});route();
-
+const CART_KEY = 'form-field-cart-v1';
+const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char =>
+  ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'})[char]);
+let storageAvailable = true;
+function readCart() {
+  try {
+    const value = JSON.parse(localStorage.getItem(CART_KEY));
+    return value && typeof value === 'object' && !Array.isArray(value)
+      ? Object.fromEntries(Object.entries(value).filter(([id, qty]) =>
+          products.some(product => product.id === id) && Number.isInteger(qty) && qty > 0 && qty <= 99))
+      : {};
+  } catch { storageAvailable = false; return {}; }
+}
+let cart = readCart(), filter = 'All objects', sort = 'featured';
+let checkoutDraft = {};
+const lines = () => products.filter(product => cart[product.id]).map(product => ({...product, qty:cart[product.id]}));
+const count = () => Object.values(cart).reduce((total, qty) => total + qty, 0);
+const subtotal = () => lines().reduce((total, product) => total + product.price * product.qty, 0);
+function save() {
+  try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+  catch { storageAvailable = false; }
+  document.querySelector('#storage-note').hidden = storageAvailable;
+  document.querySelector('#bag-count').textContent = count();
+  document.querySelector('#cart-button').setAttribute('aria-label', `Open bag, ${count()} ${count() === 1 ? 'item' : 'items'}`);
+}
+function announce(message) { document.querySelector('#live').textContent = message; }
+function add(id) {
+  const previous = cart[id] || 0;
+  cart[id] = Math.min(99, previous + 1);
+  save();
+  announce(previous === 99 ? 'Maximum quantity is 99.' : `${products.find(product => product.id === id).name} added to bag.`);
+}
+function renderShop() {
+  const shown = products.filter(product => filter === 'All objects' || product.category === filter);
+  if (sort === 'price-low') shown.sort((a, b) => a.price - b.price);
+  if (sort === 'price-high') shown.sort((a, b) => b.price - a.price);
+  main.innerHTML = `<div class="container">
+    <section class="hero"><h1>Objects for the everyday</h1><p>Considered home objects for modern living—timeless in form, useful in daily life.</p></section>
+    <div class="toolbar"><div class="filters" role="group" aria-label="Filter products">${categories.map(category => `<button type="button" class="filter" data-filter="${category}" aria-pressed="${filter === category}">${category}</button>`).join('')}</div>
+    <label class="sort">Sort <select id="sort"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label></div>
+    <p class="results">${shown.length} objects</p><section class="grid" aria-label="Products">${shown.map(product => `<article>
+      <a class="product-image-link" href="#/product/${product.id}" aria-label="View ${product.name}">${visual(product)}</a>
+      <div class="product-meta"><h2><a href="#/product/${product.id}">${product.name}</a></h2><span class="price">${money(product.price)}</span><p>${product.category}</p></div>
+      <div class="product-actions"><button class="solid-button" data-add="${product.id}">Add to bag</button><a class="text-button" href="#/product/${product.id}">View details</a></div></article>`).join('')}</section></div>`;
+  document.querySelector('#sort').value = sort;
+}
+function renderDetail(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return renderNotFound();
+  main.innerHTML = `<div class="container"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span>${product.category}</div>
+    <article class="detail">${visual(product)}<div class="detail-copy"><span class="eyeline">${product.category} / Form & Field</span>
+    <h1>${product.name}</h1><p class="detail-price">${money(product.price)}</p><p class="detail-description">${product.description}</p>
+    <div class="specs"><div><strong>Material</strong>${product.material}</div><div><strong>Size</strong>${product.size}</div></div>
+    <button class="solid-button" data-add="${product.id}">Add to bag — ${money(product.price)}</button>
+    <p class="minor">Shipping: $18, complimentary on a bag of $300 or more.</p><p class="minor">Concept catalog. Product specifications and availability are illustrative.</p></div></article></div>`;
+}
+function summary(checkout = false) {
+  const sub = subtotal(), shipping = sub >= 300 ? 0 : 18;
+  return `<aside class="summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal · ${count()} ${count() === 1 ? 'item' : 'items'}</span><strong>${money(sub)}</strong></div>
+    <div class="summary-row"><span>Shipping</span><span>${shipping ? money(shipping) : 'Complimentary'}</span></div>
+    <p class="minor">$18 shipping; complimentary at $300.</p><div class="summary-row total"><span>Total</span><span>${money(sub + shipping)}</span></div>
+    ${checkout ? '' : '<a class="solid-button" href="#/checkout">Continue to checkout</a>'}<p class="minor">Illustrative prices in USD. No payment is taken.</p></aside>`;
+}
+function renderCart() {
+  const items = lines();
+  main.innerHTML = `<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span>Bag</div>
+    <h1 class="page-title">Your bag <span class="bag-total">(${count()})</span></h1>${items.length ? `<div class="cart-layout"><div>${items.map(product => `<article class="cart-item">${visual(product)}
+      <div><h2><a href="#/product/${product.id}">${product.name}</a></h2><p>${product.material}</p>
+      <div class="qty" role="group" aria-label="Quantity for ${product.name}"><button aria-label="Decrease ${product.name} quantity" data-qty="${product.id}" data-delta="-1">−</button><span>${product.qty}</span><button aria-label="Increase ${product.name} quantity" data-qty="${product.id}" data-delta="1" ${product.qty === 99 ? 'disabled' : ''}>+</button></div>
+      <button class="remove" data-remove="${product.id}" aria-label="Remove ${product.name}">Remove</button></div><span class="price">${money(product.price * product.qty)}</span></article>`).join('')}</div>${summary()}</div>`
+      : '<div class="empty"><h2>Your bag is empty.</h2><p class="page-intro">Good things take time to find. Explore the collection.</p><a class="solid-button" href="#/">Browse objects</a></div>'}</div>`;
+}
+function renderCheckout() {
+  if (!count()) { location.hash = '#/cart'; return; }
+  const input = (id, label, autocomplete, type = 'text') => `<div class="field"><label for="${id}">${label}</label><input id="${id}" name="${id}" type="${type}" autocomplete="${autocomplete}" maxlength="160" required value="${escapeHtml(checkoutDraft[id])}" ${type === 'text' ? 'pattern=".*\\S.*" title="Enter a value containing text."' : ''}></div>`;
+  main.innerHTML = `<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span><a href="#/cart">Bag</a><span>/</span>Checkout</div>
+    <h1 class="page-title">Checkout</h1><p class="page-intro">Use sample details to try the checkout. All fields are required.</p>
+    <div class="checkout-layout"><form id="checkout-form" novalidate>
+      <section class="form-section"><h2>Contact</h2>${input('email', 'Email address', 'email', 'email')}</section>
+      <section class="form-section"><h2>Delivery address</h2><div class="field-grid">${input('first', 'First name', 'given-name')}${input('last', 'Last name', 'family-name')}</div>
+      ${input('address', 'Street address', 'street-address')}<div class="field-grid">${input('city', 'City', 'address-level2')}${input('postal', 'Postal code', 'postal-code')}</div>
+      <div class="field"><label for="country">Country</label><select id="country" name="country" required><option value="">Select country</option>${['India', 'United States', 'United Kingdom'].map(country => `<option ${checkoutDraft.country === country ? 'selected' : ''}>${country}</option>`).join('')}</select></div></section>
+      <div class="notice">Prototype checkout. No payment details are requested. Submitting shows a sample confirmation; no order is placed and no address is sent to a server. Your entries stay in page memory until confirmation or refresh.</div>
+      <p class="form-error" id="form-error" role="alert" hidden></p><button class="solid-button" type="submit">Review sample confirmation</button></form>${summary(true)}</div></div>`;
+}
+function renderSuccess() {
+  main.innerHTML = `<section class="success"><span class="mark" aria-hidden="true">✳</span><h1>Thank you for exploring.</h1>
+    <p>This is a sample confirmation. No order was placed, payment processed, or delivery arranged.</p><a class="solid-button" href="#/">Back to the collection</a></section>`;
+}
+function renderAbout() {
+  main.innerHTML = `<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span>About</div><h1 class="page-title">Less, but better.</h1>
+    <p class="page-intro about-copy">Form & Field is a fictional store created to explore a calm shopping journey. Its products, prices, and delivery terms are illustrative. Explore the collection, inspect an object, edit your bag, and try the checkout with sample details.</p><p class="minor"><a href="./wireframes.svg">View the wireframes</a> · <a href="https://github.com/ankith2409-web/AUSPIFY/blob/task/05-ecommerce-app/task-05-ecommerce-app/DESIGN.md" target="_blank" rel="noopener noreferrer">Design record</a> · <a href="https://github.com/ankith2409-web/AUSPIFY/blob/task/05-ecommerce-app/task-05-ecommerce-app/EVALUATION.md" target="_blank" rel="noopener noreferrer">Evaluation checklist</a></p>
+    <a class="solid-button about-link" href="#/">Explore the collection</a></div>`;
+}
+function renderNotFound() {
+  main.innerHTML = '<div class="page empty"><h1 class="page-title">Page not found.</h1><a class="solid-button" href="#/">Back to shop</a></div>';
+}
+function route() {
+  const path = location.hash.slice(1) || '/';
+  if (path === '/') renderShop();
+  else if (path.startsWith('/product/')) renderDetail(path.split('/')[2]);
+  else if (path === '/cart') renderCart();
+  else if (path === '/checkout') renderCheckout();
+  else if (path === '/complete') renderSuccess();
+  else if (path === '/about') renderAbout();
+  else renderNotFound();
+  save();
+  scrollTo({top:0, behavior:'instant'});
+  main.focus({preventScroll:true});
+}
+function focusCartControl(id, delta) {
+  const preferred = main.querySelector(`[data-qty="${id}"][data-delta="${delta}"]:not(:disabled)`);
+  (preferred || main.querySelector(`[data-qty="${id}"]:not(:disabled)`) || main.querySelector('[data-qty]') || main.querySelector('h1'))?.focus();
+}
+document.addEventListener('click', event => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  if (button.id === 'cart-button') { location.hash = '#/cart'; return; }
+  if (button.dataset.filter) {
+    filter = button.dataset.filter; renderShop();
+    main.querySelector(`[data-filter="${filter}"]`).focus();
+    announce(`${main.querySelector('.results').textContent} in ${filter}.`);
+  }
+  if (button.dataset.add) {
+    add(button.dataset.add);
+    const old = button.textContent;
+    button.textContent = 'Added to bag';
+    setTimeout(() => { if (button.isConnected) button.textContent = old; }, 1200);
+  }
+  if (button.dataset.qty || button.dataset.remove) {
+    const id = button.dataset.qty || button.dataset.remove;
+    cart[id] = button.dataset.remove ? 0 : Math.min(99, cart[id] + Number(button.dataset.delta));
+    if (cart[id] < 1) delete cart[id];
+    save(); renderCart();
+    const title = main.querySelector('h1'); title.tabIndex = -1;
+    focusCartControl(id, button.dataset.delta);
+    announce(`${products.find(product => product.id === id).name}: ${cart[id] || 0} in bag. Subtotal ${money(subtotal())}.`);
+  }
+});
+document.addEventListener('change', event => {
+  if (event.target.id === 'sort') { sort = event.target.value; renderShop(); main.querySelector('#sort').focus(); announce('Products sorted.'); }
+  if (event.target.closest('#checkout-form')) checkoutDraft[event.target.name] = event.target.value;
+});
+document.addEventListener('input', event => {
+  if (event.target.closest('#checkout-form')) {
+    checkoutDraft[event.target.name] = event.target.value;
+    event.target.removeAttribute('aria-invalid');
+  }
+});
+document.addEventListener('submit', event => {
+  if (event.target.id !== 'checkout-form') return;
+  event.preventDefault();
+  const form = event.target, error = document.querySelector('#form-error');
+  const invalid = [...form.elements].filter(field => field.willValidate && !field.validity.valid);
+  form.querySelectorAll('[aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
+  if (invalid.length) {
+    invalid.forEach(field => field.setAttribute('aria-invalid', 'true'));
+    error.hidden = false;
+    error.textContent = `Check ${invalid.length} ${invalid.length === 1 ? 'field' : 'fields'}. Start with ${form.querySelector(`label[for="${invalid[0].id}"]`).textContent.toLowerCase()}.`;
+    invalid[0].focus();
+    return;
+  }
+  checkoutDraft = {}; cart = {}; save(); location.hash = '#/complete';
+});
+addEventListener('hashchange', route);
+addEventListener('storage', event => { if (event.key === CART_KEY) { cart = readCart(); route(); } });
+route();

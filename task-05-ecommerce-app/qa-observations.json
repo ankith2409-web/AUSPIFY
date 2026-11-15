@@ -1,0 +1,35 @@
+{
+  "reviewed": "2026-11-16",
+  "method": "Internal browser QA; no participant sessions",
+  "checks": [
+    {
+      "name": "5 filter and sort",
+      "pass": true
+    },
+    {
+      "name": "5 quantity focus",
+      "pass": true
+    },
+    {
+      "name": "5 empty checkout blocks",
+      "pass": true
+    },
+    {
+      "name": "5 draft survives bag navigation",
+      "pass": true
+    },
+    {
+      "name": "5 checkout 390px no overflow",
+      "pass": true
+    },
+    {
+      "name": "5 sample confirmation",
+      "pass": true
+    },
+    {
+      "name": "5 catalog 390px no overflow",
+      "pass": true
+    }
+  ],
+  "console": []
+}
