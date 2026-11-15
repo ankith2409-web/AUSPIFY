@@ -46,7 +46,7 @@
       <div class="shell context-grid">
         <div><span>01 / CHALLENGE</span><p>People in distress need certainty about whether a request reached anyone.</p></div>
         <div><span>02 / DESIGN RESPONSE</span><p>Use plain-language states and a visible call alternative at each critical point.</p></div>
-        <div><span>03 / SCOPE</span><p>Patient-facing concept. Dispatch, clinical triage, and police coordination require institutional integration.</p></div>
+        <div><span>03 / SCOPE</span><p>Patient delivery-state study and a three-role local handoff demo. Real dispatch requires institutional integration.</p></div>
       </div>
     </section>
 
@@ -65,12 +65,24 @@
           </tbody>
         </table></div>
       </div>
-      <p class="source-line">Sources: <a href="https://www.mha.gov.in/emergency-response-support-system-erss" target="_blank" rel="noopener noreferrer">Ministry of Home Affairs / ERSS</a>, <a href="https://play.google.com/store/apps/details?id=in.cdac.ners.psa.mobile.android.national" target="_blank" rel="noopener noreferrer">112 India app listing</a>, <a href="https://nhm.gov.in/nhm_live/index1.php?lang=1&amp;level=2&amp;lid=189&amp;sublinkid=1217" target="_blank" rel="noopener noreferrer">National Health Mission / ambulance services</a>, <a href="https://developer.rapidsos.com/public_safety/default/how-to-integrate-with-rapid-sos-portal" target="_blank" rel="noopener noreferrer">RapidSOS developer documentation</a>.</p>
+      <p class="source-line">Sources: <a href="https://www.mha.gov.in/emergency-response-support-system-erss" target="_blank" rel="noopener noreferrer">Ministry of Home Affairs / ERSS</a>, <a href="https://play.google.com/store/apps/details?id=in.cdac.ners.psa.mobile.android.national" target="_blank" rel="noopener noreferrer">112 India app listing</a>, <a href="https://nhm.gov.in/nhm_live/index1.php?lang=1&amp;level=2&amp;lid=189&amp;sublinkid=1217" target="_blank" rel="noopener noreferrer">National Health Mission / ambulance services</a>, <a href="https://rapidsos.com/emergency-response-coordination/" target="_blank" rel="noopener noreferrer">RapidSOS coordination overview</a>.</p>
+      <div class="research-evidence">
+        <h3>What published user studies add</h3>
+        <p>Rochat and colleagues tested InfoKids with 17 parents. They found 14 usability problems, seven rated major or catastrophic, despite positive overall usability ratings. That result is a reason to observe individual tasks and recovery paths rather than infer ease of use from a polished screen. This study concerns pediatric emergency-department care in Geneva; it does not validate this Bengaluru coordination concept.</p>
+        <p>Romano and colleagues evaluated a different emergency-notification app using a simulated accident and expert interviews. It provides a precedent for contextual evaluation, not evidence that this prototype improves emergency response.</p>
+        <p class="source-line">Original studies: <a href="https://pediatrics.jmir.org/2022/1/e25540/" target="_blank" rel="noopener noreferrer">Rochat et al., 2022</a> · <a href="https://www.mdpi.com/1424-8220/16/3/406" target="_blank" rel="noopener noreferrer">Romano et al., 2016</a>. <a href="https://github.com/ankith2409-web/AUSPIFY/blob/task/06-product-case-study/task-06-product-case-study/RESEARCH.md" target="_blank" rel="noopener noreferrer">Full evidence and assumption register</a>.</p>
+      </div>
+      <div class="process-grid persona-grid">
+        <article><span class="process-index">P1 / HYPOTHESIS</span><h3>A bystander on a phone</h3><p><strong>Goal:</strong> share an understandable pickup point and know who accepted. <strong>Possible difficulty:</strong> mistaking a sent request for an assigned ambulance. <strong>Design response:</strong> distinct waiting and accepted states with a direct-call option. Validate the wording with local participants.</p></article>
+        <article><span class="process-index">P2 / HYPOTHESIS</span><h3>A hospital coordinator</h3><p><strong>Goal:</strong> review the pickup and need before assigning a sample vehicle. <strong>Possible difficulty:</strong> losing a partly entered identifier while changing views. <strong>Design response:</strong> retain the draft and gate dispatch after acceptance. Actual triage and workload are unresearched.</p></article>
+        <article><span class="process-index">P3 / HYPOTHESIS</span><h3>A traffic coordinator</h3><p><strong>Goal:</strong> understand and acknowledge a proposed route alert. <strong>Possible difficulty:</strong> assuming arrival proves acknowledgement. <strong>Design response:</strong> retain the separate acknowledgement event. This proposed role needs validation with authorized staff.</p></article>
+      </div>
+      <p class="source-line">These are provisional personas, not interview participants. Secondary research is documented; firsthand research for this product has not been conducted.</p>
     </section>
 
     <section class="section muted-section" id="process">
       <div class="shell">
-        <div class="section-heading"><p class="section-number">02 / FRAMING</p><h2>Design for uncertainty, not an imaginary perfect network.</h2></div>
+        <div class="section-heading"><p class="section-number">02 / FRAMING</p><h2>Make each handoff understandable.</h2></div>
         <div class="process-grid">
           <article><span class="process-index">A</span><h3>Who this is for</h3><p>A patient or bystander on a phone, possibly stressed, outdoors, or on an unreliable connection. This is a design assumption, not a researched persona from interviews.</p></article>
           <article><span class="process-index">B</span><h3>What they need</h3><p>A short request, confidence that it was delivered, the identity of whoever accepted it, and an unambiguous alternative when it fails or no provider responds.</p></article>
@@ -80,12 +92,13 @@
           <h3>Patient journey</h3>
           <ol><li><strong>Locate</strong><span>Confirm the pickup point.</span></li><li><strong>Describe</strong><span>Choose a category and add contact details.</span></li><li><strong>Review</strong><span>Check before sending.</span></li><li><strong>Wait</strong><span>See delivery and acceptance status.</span></li><li><strong>Act</strong><span>Track the proposed handoff or call 112.</span></li></ol>
         </div>
-        <p class="wireframe-link">The low fidelity exploration is in <a href="https://www.figma.com/design/OoIJIHcTxCjIO37I3FHNom" target="_blank" rel="noopener noreferrer">Task 1’s editable wireframes ↗</a>. The interactive screens below refine its status and failure branches.</p>
+        <figure class="wireframe-board"><a href="./wireframes.svg"><img src="./wireframes.svg" alt="Six low fidelity screens covering patient intake, hospital dispatch, traffic acknowledgement, review, waiting, and failure recovery" loading="lazy"></a><figcaption>Original editable SVG wireframes. <a href="./wireframes.svg">Open the full board</a>.</figcaption></figure>
+        <div class="journey"><h3>Three-role service journey</h3><ol><li><strong>Patient</strong><span>Create a sample request.</span></li><li><strong>Hospital</strong><span>Review, accept, and assign a vehicle.</span></li><li><strong>Traffic</strong><span>Acknowledge the route alert.</span></li><li><strong>Patient</strong><span>Read the current handoff.</span></li><li><strong>Complete</strong><span>Retain the completed details.</span></li></ol></div>
       </div>
     </section>
 
     <section class="section shell" id="prototype">
-      <div class="section-heading"><p class="section-number">03 / SOLUTION</p><h2>Try the handoff journey.</h2><p class="section-description">The controls work locally in your browser. Use the reviewer controls to simulate delivery, hospital acceptance, or a lack of response. No data leaves this page.</p></div>
+      <div class="section-heading"><p class="section-number">03 / SOLUTION</p><h2>Explore delivery and recovery states.</h2><p class="section-description">This focused patient study explores review, simulated delivery, failed send, and no response. The separate working demo models the three roles with shared browser-local state. Use sample details in both; neither connects to emergency services.</p></div>
       <div class="prototype-layout">
         <aside class="prototype-guide">
           <p class="guide-heading">JOURNEY MAP</p>
@@ -116,15 +129,16 @@
     </section>
 
     <section class="section shell" id="evaluation">
-      <div class="section-heading"><p class="section-number">05 / EVALUATION</p><h2>What was checked—and what remains unproven.</h2></div>
+      <div class="section-heading"><p class="section-number">05 / EVALUATION</p><h2>What the review found.</h2></div>
       <div class="evaluation-grid">
-        <div><h3>Verified in this prototype</h3><ul><li>All visible controls have a defined response.</li><li>Keyboard focus, form labels, and status text are present.</li><li>Review, delivered, accepted, failed send, and no-response states are distinct.</li><li>The layout adapts to narrow screens and desktop.</li></ul></div>
-        <div><h3>Needed before a real product</h3><ul><li>Interviews and observed usability sessions with diverse users.</li><li>Partnerships, contracts, and verified dispatch integration.</li><li>Privacy, security, consent, and data retention review.</li><li>Device testing, screen reader testing, and unreliable-network trials.</li></ul></div>
+        <div><h3>Internal review and revisions</h3><ul><li>Completed requests now retain pickup, hospital, vehicle, and handoff history.</li><li>Changing roles preserves an unfinished request or vehicle draft.</li><li>Arrival and traffic acknowledgement remain separate events.</li><li>Review, failed send, sent, accepted, and no response have distinct screens.</li></ul></div>
+        <div><h3>Evidence still needed</h3><ul><li>Observed sessions with local users; provisional personas remain unvalidated.</li><li>Hospital and traffic-staff research to establish a viable service workflow.</li><li>Screen reader, physical-device, and unreliable-network evaluation.</li><li>Institutional integration before any live emergency use.</li></ul></div>
       </div>
-      <p class="closing">Outcome: a reviewable concept and working UI prototype. No user research findings, clinical outcomes, or real emergency response improvements are claimed.</p>
+      <p class="closing">Outcome: a documented design concept and interactive prototypes, with internal checks recorded in the <a href="https://github.com/ankith2409-web/AUSPIFY/blob/task/06-product-case-study/task-06-product-case-study/EVALUATION.md" target="_blank" rel="noopener noreferrer">evaluation checklist</a>. No participant success rate or emergency response improvement is claimed. <a href="https://github.com/ankith2409-web/AUSPIFY/blob/task/06-product-case-study/task-06-product-case-study/USABILITY-TEST.md" target="_blank" rel="noopener noreferrer">The next study protocol is ready</a>; no participant sessions have been completed.</p>
     </section>
   </main>
   <footer class="site-footer shell"><span>THE SAVIOUR / PRODUCT DESIGN CONCEPT</span><a href="#top">Back to top ↑</a><span>For an actual emergency in India, call <a href="tel:112">112</a>.</span></footer>
 </body>
 </html>
+
 

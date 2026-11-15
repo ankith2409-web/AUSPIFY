@@ -18,9 +18,10 @@
     <div class="top-actions"><a href="./case-study.html">Read the case study <span aria-hidden="true">↗</span></a><a class="call-link" href="tel:112">Call 112 <span aria-hidden="true">↗</span></a></div>
   </header>
 
-  <main id="workspace" class="workspace">
+  <main id="workspace" class="workspace" tabindex="-1">
+    <p id="storage-note" class="form-error" role="status" hidden>Browser storage is unavailable. Actions work in this page, but updates cannot be saved or shared across tabs.</p>
     <div class="workspace-heading">
-      <div><p class="kicker">ONE REQUEST · THREE VIEWS</p><h1>Coordinate the next step.</h1><p>Open the patient, hospital, and traffic views in separate tabs to see a request move through the system.</p></div>
+      <div><p class="kicker">ONE REQUEST · THREE VIEWS</p><h1>Coordinate the next step.</h1><p>Try a sample handoff across patient, hospital, and traffic views. Tabs in this browser share demo updates.</p></div>
       <div class="demo-notice"><strong>Local demonstration</strong><span>No live hospital, ambulance, police, map, or dispatch connection. Do not enter real emergency or personal information.</span></div>
     </div>
 
@@ -36,7 +37,7 @@
       </aside>
 
       <section class="main-panel" aria-label="Selected workspace">
-        <div class="panel-head"><div><p id="role-caption" class="kicker"></p><h2 id="role-title"></h2></div><span id="request-count" class="request-count"></span></div>
+        <div class="panel-head"><div><p id="role-caption" class="kicker"></p><h2 id="role-title" tabindex="-1"></h2></div><span id="request-count" class="request-count"></span></div>
         <div id="content" class="content" aria-live="polite"></div>
       </section>
 
@@ -47,7 +48,8 @@
       </aside>
     </div>
   </main>
-  <footer class="footer"><span>THE SAVIOUR / UI/UX DESIGN CONCEPT</span><span>For an actual emergency in India, call <a href="tel:112">112</a>.</span></footer>
+  <footer class="footer"><span>THE SAVIOUR / UI/UX DESIGN CONCEPT · <a href="./wireframes.svg">Wireframes</a></span><span>For an actual emergency in India, call <a href="tel:112">112</a>.</span></footer>
 </body>
 </html>
+
 

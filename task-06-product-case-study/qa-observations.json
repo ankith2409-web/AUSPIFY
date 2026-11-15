@@ -1,0 +1,59 @@
+{
+  "reviewed": "2026-11-16",
+  "method": "Internal browser QA; no participant sessions",
+  "checks": [
+    {
+      "name": "6 patient draft retained",
+      "pass": true
+    },
+    {
+      "name": "6 vehicle draft retained",
+      "pass": true
+    },
+    {
+      "name": "6 arrival retains details without inventing receipt",
+      "pass": true
+    },
+    {
+      "name": "6 completed request 390px no overflow",
+      "pass": true
+    },
+    {
+      "name": "6 patient form 390px no overflow",
+      "pass": true
+    },
+    {
+      "name": "6 acknowledgement syncs across tabs",
+      "pass": true
+    },
+    {
+      "name": "6 normal handoff completes",
+      "pass": true
+    },
+    {
+      "name": "6 patient study back preserves draft",
+      "pass": true
+    },
+    {
+      "name": "6 failed send state",
+      "pass": true
+    },
+    {
+      "name": "6 no response state",
+      "pass": true
+    },
+    {
+      "name": "6 case study 390px no overflow",
+      "pass": true
+    },
+    {
+      "name": "6 exact phone viewport verified",
+      "pass": true
+    },
+    {
+      "name": "6 exact phone case study no overflow",
+      "pass": true
+    }
+  ],
+  "console": []
+}

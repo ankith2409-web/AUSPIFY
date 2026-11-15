@@ -214,3 +214,22 @@ tbody th { min-width: 135px; font-weight: 800; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+
+
+.research-evidence { margin-top: 42px; padding: 26px; border-left: 3px solid #087b78; background: #edf4f3; }
+.research-evidence h3 { margin: 0 0 14px; font-size: 23px; }
+.research-evidence p { line-height: 1.7; }
+.persona-grid { margin-top: 35px; }
+.wireframe-board { margin: 38px 0; }
+.wireframe-board img { width: 100%; height: auto; border: 1px solid #c6d4d7; }
+.wireframe-board figcaption { margin-top: 12px; font-size: 13px; }
+
+/* Allow grid children to shrink before their content scrolls internally. */
+.research-layout > *, .prototype-layout > * { min-width: 0; }
+.prototype-guide { max-width: 100%; }
+@media (max-width: 760px) {
+  .prototype-layout { grid-template-columns: minmax(0, 1fr); }
+  .prototype-guide ol { flex-wrap: wrap; overflow: visible; }
+  .research-table-wrap table { table-layout: fixed; width: 100%; }
+  .research-table-wrap th, .research-table-wrap td { overflow-wrap: anywhere; }
+}

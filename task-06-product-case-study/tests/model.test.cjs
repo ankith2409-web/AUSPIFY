@@ -28,3 +28,4 @@ test("invalid transitions and incomplete requests are rejected", () => {
   assert.deepEqual(update(state, "clear"), initial());
 });
 
+

@@ -174,3 +174,12 @@ fieldset legend { grid-column: 1 / -1; margin-bottom: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 
+
+
+#role-title:focus, #workspace:focus { outline: none; }
+.completion button { margin-top: 15px; }
+@media (max-width: 760px) {
+  .sidebar-bottom { display: block; margin-top: 12px; padding: 12px 5px 0; }
+  .sidebar-bottom .signal, .sidebar-bottom p { display: none; }
+  .sidebar-bottom button { min-height: 44px; }
+}

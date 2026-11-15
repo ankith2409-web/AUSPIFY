@@ -130,6 +130,13 @@ document.addEventListener("click", event => {
     return;
   }
   const target = event.target.closest("[data-screen]");
+  const form = document.querySelector("#request-form");
+  if (form?.id === "request-form" && target) {
+    const draft = new FormData(form);
+    state.location = String(draft.get("location") || "");
+    state.contact = String(draft.get("contact") || "");
+    state.note = String(draft.get("note") || "");
+  }
   if (target) render(target.dataset.screen, true);
 });
 
@@ -146,4 +153,5 @@ document.addEventListener("submit", event => {
 });
 
 render();
+
 
