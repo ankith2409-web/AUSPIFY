@@ -1,82 +1,87 @@
-# Task 01 — Mobile app wireframes
+# Task 01 — Mobile app wireframe design
 
-**Product:** THE SAVIOUR · patient emergency request flow  
-**Deliverable:** low fidelity mobile wireframes, navigation map, and a browser based walkthrough  
-**Canvas:** 390 × 844 px
+**Product:** THE SAVIOUR / patient request concept  
+**Required outcome:** Low fidelity mobile wireframes focused on layout and user flow.  
+**Submission:** [Editable six-screen board](wireframes.svg), [browser walkthrough](index.html), [review evidence](EVALUATION.md), and [screenshots](screenshots/).
 
-[Open the editable Figma wireframes](https://www.figma.com/design/OoIJIHcTxCjIO37I3FHNom)
+![Six-screen wireframe presentation](screenshots/08-wireframes-board.jpg)
 
-![Six-screen wireframe overview](wireframes-overview.png)
+## What the client asked for
 
-## Problem and scope
+The Auspify UI/UX task list, page 6, specifies five steps: define application requirements; create key wireframes; design navigation; review usability/accessibility; present the design. Page 12 asks for source and completed-task screenshots. A GitHub link is requested if available; video is optional.
 
-In a stressful situation, a patient or bystander needs a short path to request an ambulance, see whether the request was actually sent, and know what to do if delivery fails. This flow covers the patient's side only. Hospital acceptance and traffic police coordination are separate product flows and are not implied by these screens.
+This is a layout study. The brief does not ask Task 1 to integrate hospitals, provide a backend, or conduct a participant study. The browser walkthrough is supplementary evidence of the navigation.
 
-### Requirements
+## Requirements
 
-1. Let the user check or correct the pickup location before sending.
-2. Request only the emergency category, a contact method, and optional context.
-3. Show a review step and a clear transition from unsent to sent.
-4. Distinguish waiting for a hospital from an ambulance that has actually been assigned.
-5. If delivery fails, explicitly say no hospital received the request and preserve the form details.
-6. Keep a direct emergency calling alternative visible while waiting and after failure.
+| ID | Application requirement | Design evidence |
+| --- | --- | --- |
+| R1 | Let a patient or bystander check and correct the pickup before continuing. | Home shows the sample pickup; Details permits editing it. |
+| R2 | Collect category and contact; make extra context optional. | Labelled form, radio group, optional note. |
+| R3 | Review everything that would be sent, and allow correction. | Review includes location, category, contact and any optional note; Edit returns to retained details. |
+| R4 | Distinguish delivered/waiting from provider acceptance. | Separate Finding help and Assigned wireframes. Both are explicitly illustrated states. |
+| R5 | Show an undelivered outcome with retry and a call alternative. | Failure wireframe says no hospital received the request; retry and edit retain the draft. |
+| R6 | Keep calling available without accidentally making a call during design review. | Labelled call buttons display an explicit placeholder message. |
+| R7 | Support a review on desktop and mobile with keyboard-accessible controls. | Responsive presentation, semantic controls, focus indicators and focused screen headings. |
 
-## Screen map
-
-| Screen | Purpose | Main action | Next state |
-| --- | --- | --- | --- |
-| 01 Home | Confirm location and start | Request ambulance | 02 Details |
-| 02 Details | Collect essential request information | Review request | 03 Review |
-| 03 Review | Check information before sending | Send emergency request | 04 Finding help if delivered; 06 Failure if sending fails |
-| 04 Finding help | Show delivered request status and next steps | Wait, or call emergency services | 05 Assigned |
-| 05 Assigned | Show hospital, ambulance, and ETA | Call ambulance | Remains in tracking state |
-| 06 Failure | State clearly that no request was delivered | Try again or call | 04 Finding help; calling needs production setup |
-
-**Navigation:** `Home → Details → Review → Finding help → Assigned`; a failed send goes from Review to `Failure → Retry`. Review offers a back path to edit the details. The browser walkthrough lets a reviewer simulate both send outcomes; it does not contact a real hospital.
+## Navigation
 
 ```mermaid
 flowchart TD
-    A["Home / location"] --> B["Request details"]
-    B --> C["Review"]
-    C -->|Edit| B
-    C -->|Delivered| D["Finding help"]
-    C -->|Send failed| F["Request not sent"]
-    D -->|Hospital accepts| E["Ambulance assigned"]
-    F -->|Retry, details retained| D
+  A["Home / sample pickup"] --> B["Request details"]
+  B --> C["Review all details"]
+  C -->|Edit| B
+  C -->|Illustrate delivery| D["Finding help"]
+  C -->|Illustrate failure| F["Request not sent"]
+  F -->|Retry with retained details| D
+  F -->|Edit| B
+  D -->|Show sample acceptance| E["Ambulance assigned"]
+  E -->|View details| C
 ```
 
-## Design decisions
+The numbered screen list is a **reviewer control** for visiting any wireframe. It is not proposed as patient-facing app navigation.
 
-- One prominent action per screen and direct labels reduce choices under stress.
-- The review step prevents an accidental send while keeping the information brief.
-- Delivery failure says explicitly that **no hospital received the request**. A retry retains the entered information.
-- Emergency calling is available during the wait and failure states. The number must be configured and validated for deployment; the prototype deliberately does not invent one.
-- ETA is an estimate, not a promise. The interface says it can change.
-- Large controls, readable contrast, visible focus, and text status labels avoid relying on color alone.
+## Key screens and layouts
 
-### Usability and accessibility review
+| Screen | Layout priority | Main transition |
+| --- | --- | --- |
+| 01 Home | Pickup/map placeholder, primary request, call alternative | Details |
+| 02 Details | Location, emergency category, contact, optional note | Review or Home |
+| 03 Review | All entered content, edit, primary send | Waiting or illustrated failure |
+| 04 Finding help | Waiting state, next steps, call | Sample acceptance |
+| 05 Assigned | Provider, vehicle and arrival placeholders | View details or call |
+| 06 Failure | Explicit non-delivery, retained draft, retry, edit, call | Waiting or Details |
 
-| Check | Review result |
+The editable SVG uses six 390 × 844 px artboards. The HTML demonstration allows content to grow and scroll rather than clipping long notes. Grayscale blocks and simple typography keep attention on structure.
+
+## Usability and accessibility review
+
+| Inspection | Result and limit |
 | --- | --- |
-| Primary action | One clear, 52 px high primary control on each action screen. |
-| Form clarity | Location, emergency type, contact, and note have visible labels; note is optional. |
-| Error recovery | Failure copy states that delivery did not occur; retry retains the entered details. |
-| Status comprehension | Text distinguishes searching from assigned; status never relies on color alone. |
-| Keyboard walkthrough | Native buttons and inputs expose focus; focus-visible styling is present in the HTML. |
-| Screen reader | Semantic form labels and a named navigation region are present; a real screen reader test is still needed. |
-| Device and network | Small-screen layout is included; real device, offline, and slow-network tests remain for implementation. |
+| Review accuracy | Optional note was missing; fixed and verified in the browser. |
+| Error recovery | Failure → Edit retained the category, location and optional note in the walkthrough. |
+| Focus | Replacing screens formerly lost focus; it now moves to the new heading. |
+| Controls | Native labelled inputs, a named radio group, visible keyboard focus, 52 px primary controls and at least 44 px scenario buttons. |
+| Mobile | A 375 px viewport was verified with no horizontal document overflow; mobile presentation screenshot is included. |
+| State clarity | Permanent sample notice plus per-state labels prevent the map, provider and arrival placeholders from implying live data. |
+| Assistive technology | Labels and heading focus inspected. A real screen reader session and participant testing were not performed. |
 
-## Run the walkthrough
+No full WCAG certification or measured usability improvement is claimed.
 
-Open `index.html` in a browser. No install or build step is required. The walkthrough is a local UI prototype with sample details; it is not an emergency service.
+## Run and inspect
 
-## Review checklist
+Open `index.html` locally. The files have no runtime dependencies. Use fictitious information; nothing is transmitted or saved after reload. Run `node --check app.js` for a syntax check.
 
-- [x] Six key screens and primary navigation are mapped.
-- [x] Send, wait, accepted, and failure states are distinct.
-- [x] Form fields have labels and controls remain keyboard accessible.
-- [x] Mobile viewport and desktop presentation were considered.
-- [x] Overview screenshot is included for submission.
-- [ ] Test the flow with real users, including a screen reader user, before treating usability as validated.
-- [ ] Verify production emergency call routing, hospital availability, privacy, and data delivery before implementation.
+Read [EVALUATION.md](EVALUATION.md) for the criterion-by-criterion audit and evidence for all six steps of the demonstration.
+
+The [initial Figma wireframes](https://www.figma.com/design/OoIJIHcTxCjIO37I3FHNom) are a historical companion. The Figma connector could not reread that file during this audit, so its current contents and permissions are **unverified**. The submitted SVG, browser source and new screenshots are the verified deliverables. The older `wireframes-overview.png` is an initial version, not the revised presentation.
+
+## Submission package
+
+- Source: `index.html`, `styles.css`, `app.js`, `wireframes.svg`.
+- Screenshots: all six states, desktop/mobile presentation and the six-screen board in `screenshots/`.
+- GitHub: branch `task/01-mobile-wireframes`, folder `task-01-mobile-wireframes/`.
+- Demonstration video: optional; not recorded.
+- Live Vercel preview: supplementary and access-protected; temporary share links expire. Submit the source and screenshots as durable evidence.
+
 
