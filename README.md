@@ -13,6 +13,10 @@ Each task has its own folder and branch. This default branch is the directory; u
 
 ## Latest review
 
-Tasks 01 and 02 were re-evaluated against the full internship PDF in the 15–16 November 2026 review. Their `EVALUATION.md` files map every task step, all seven general evaluation criteria, submission screenshots, fixes and remaining verification limits. This review does not certify the other tasks.
+Tasks 01, 02, 05 and 06 were re-evaluated against the full internship PDF in the 15–16 November 2026 review. Each project's `EVALUATION.md` maps the required workflow, all seven general criteria, actual screenshots, fixes and remaining limits. Tasks 03 and 04 are outside this re-audit.
+
+Task 05 remains incomplete against the required usability-testing step: no participant sessions have been conducted. Task 06 includes secondary user/competitor research, but its personas and proposed staff workflow remain unvalidated. Internal QA is recorded separately from participant research.
+
+[Task 05 live prototype](https://auspify-task-05.vercel.app/) · [Task 06 live demo](https://auspify-task-06.vercel.app/) · [Task 06 case study](https://auspify-task-06.vercel.app/case-study.html)
 
 THE SAVIOUR projects are design concepts. Their sample states do not connect to real emergency services. Vercel previews may require sign-in or a temporary share link; repository source and screenshots are the durable submission artifacts.
