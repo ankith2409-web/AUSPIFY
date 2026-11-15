@@ -4,6 +4,13 @@
 
 Open `index.html` in a browser. No build, API key, database, or account is needed.
 
+## Desk research
+
+- [GOV.UK dashboard guidance](https://brand.design-system.service.gov.uk/data/dashboards/) describes dashboards as high-level indicator views and calls for careful hierarchy and concise explanation. This informed the summary-first layout and separate record detail.
+- [W3C WAI table tutorial](https://www.w3.org/WAI/tutorials/tables/) explains why header relationships matter for accessible data tables. The register uses semantic column headers rather than a visual grid of divs.
+
+These are design references, not competitor testing or research with dispatch staff. A real operational design requires participant interviews, verified data definitions, and institutional review.
+
 ## Workflow and design decisions
 
 | Required step | Evidence |
