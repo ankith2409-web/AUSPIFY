@@ -3,5 +3,10 @@
   "url": "https://auspify-task-04.vercel.app/",
   "monthlyMetrics": "Incidents\n101\nJanuary 2025\nAcceptance rate\n85.1%\n86 of 101 accepted or later\nMedian response\n16 min\nExcludes waiting records\nOpen cases\n59\nNot marked completed",
   "filteredExport11Enabled": true,
-  "console": []
+  "console": [],
+  "pagination": {
+    "firstRecord": "INC-02471",
+    "page": "Page 2 of 5 / 26-50 of 101",
+    "scrollTop": 0
+  }
 }

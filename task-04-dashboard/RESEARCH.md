@@ -61,12 +61,13 @@ Monthly groups have different durations; the final group is explicitly labeled a
 | A status change dropped keyboard focus to the document body | Restore the changed control; preserve search caret |
 | Detail had no current sidebar section | Keep Incidents selected; preserve filters and register page on return |
 | Mobile menu lacked Escape recovery | Use a non-modal navigation disclosure with expanded state, Escape, focus return, and outside-focus closing |
+| Pagination left the view at the bottom of the new page | Move focus and scroll to the beginning of the new results page |
 | Skip link was treated as a hash route | Move focus to the current heading without replacing its section |
 
 ## Accessibility and validation scope
 
 Labels, landmarks, focus feedback, text status labels, row/column headers, a skip link, chart text/table alternatives, large controls, contained table overflow, and reduced-motion styles were inspected. The application uses native controls rather than an ARIA application menu or custom select. The mobile navigation is a non-modal disclosure, not a dialog.
 
-Nine automated regressions test fixture integrity, inclusive dates, totals, distributions, median calculation, filtering, CSV quoting, export scope, and safe text interpolation. Twenty internal browser checks cover the working interactions and responsive layouts. The downloaded report for January + Completed + Riverside General contained exactly 11 data rows; that actual artifact is preserved in `evidence/`.
+Nine automated regressions test fixture integrity, inclusive dates, totals, distributions, median calculation, filtering, CSV quoting, export scope, and safe text interpolation. Twenty-one internal browser checks cover the working interactions and responsive layouts. The downloaded report for January + Completed + Riverside General contained exactly 11 data rows; that actual artifact is preserved in `evidence/`.
 
 No participant usability sessions, screen-reader sessions, real service integration, or full WCAG certification were conducted. These limits do not remove the completed prototype work requested by the brief.

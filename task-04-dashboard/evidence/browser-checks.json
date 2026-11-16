@@ -171,6 +171,16 @@
     {
       "name": "Task 4 skip link preserves the current section",
       "pass": true
+    },
+    {
+      "name": "Task 4 pagination brings the new result page into view",
+      "pass": true,
+      "detail": {
+        "focus": "H1",
+        "headingTop": 91,
+        "page": "Page 2 of 5 / 26-50 of 101",
+        "scrollTop": 0
+      }
     }
   ]
 }

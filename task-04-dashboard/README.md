@@ -25,7 +25,7 @@ The dataset contains 101 invented records across January 2025; 29 belong to 18-2
 | `RESEARCH.md` | Primary-source desk research, design inferences, metric definitions, refinements |
 | `EVALUATION.md` | All five Task 4 steps and seven PDF evaluation criteria |
 | `tests/data.test.cjs` | Nine data and export regression checks |
-| `evidence/` | Twelve real browser screenshots, 20 browser checks, and the downloaded 11-row CSV |
+| `evidence/` | Twelve real browser screenshots, 21 browser checks, and the downloaded 11-row CSV |
 
 ## Run locally
 
@@ -41,4 +41,4 @@ Open `http://localhost:8766/`. The application itself has no package dependencie
 node --test tests/data.test.cjs
 ```
 
-Validation on 16 November 2026: **9/9 automated checks and 20/20 internal browser checks passed**. The actual downloaded CSV matched the 11 selected records. Desktop, tablet, and mobile layouts were inspected. These checks do not constitute a participant study or a full accessibility conformance audit.
+Validation on 16 November 2026: **9/9 automated checks and 21/21 internal browser checks passed**. The actual downloaded CSV matched the 11 selected records. Desktop, tablet, and mobile layouts were inspected. These checks do not constitute a participant study or a full accessibility conformance audit.

@@ -30,7 +30,7 @@ Reviewed against the complete 13-page **UI_UX DEVELOPMENT TASK LIST(1).pdf**, es
 
 - `node --test tests/data.test.cjs`: **9 passed, 0 failed**.
 - `node --check app.js`: passed.
-- Internal browser walkthrough: **20 passed, 0 failed** in [the recorded results](evidence/browser-checks.json).
+- Internal browser walkthrough: **21 passed, 0 failed** in [the recorded results](evidence/browser-checks.json).
 - Browser keyboard tests confirmed range/status changes retain focus. Escape closes mobile navigation and returns focus to its toggle. The skip link preserves the current section.
 - Requested 390px viewport: recorded content width 375px, table region 305px, internal table scroll width 880px, with no document overflow. Requested 320px content width was 305px; requested 768px content width was 753px because of the scrollbar gutter.
 - The actual [downloaded CSV](evidence/export-month-completed-riverside.csv) contained **11 rows**, each matching January + Completed + Riverside General. It was not merely inferred from the export button.

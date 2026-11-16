@@ -97,6 +97,7 @@ document.addEventListener('click', event => {
     pageNumber += button.id === 'next' ? 1 : -1;
     render();
     main.querySelector('h1').focus({preventScroll:true});
+    scrollTo({top:0,behavior:'instant'});
     announce(`Page ${pageNumber}; ${rows().length} records match`);
   } else if (button.id === 'export') download();
   else if (button.dataset.facility) {

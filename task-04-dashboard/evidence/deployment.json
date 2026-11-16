@@ -1,6 +1,6 @@
 {
-  "verifiedAt": "2026-11-16T16:20:17.935Z",
-  "deploymentId": "dpl_ijjk7HYsts3DxL89KZ7hadQiAYpQ",
+  "verifiedAt": "2026-11-16T16:31:34.375Z",
+  "deploymentId": "dpl_6wmuJNcX919vpPwFHtxnhcp4puQp",
   "state": "READY",
   "url": "https://auspify-task-04.vercel.app/",
   "files": [
@@ -28,8 +28,8 @@
     {
       "file": "app.js",
       "status": 200,
-      "bytes": 13938,
-      "sha256": "a4b4fda884ee8dc3e7ec4d4d420975e39cb04c90c67afe75dff4cf535bbc3d45",
+      "bytes": 13980,
+      "sha256": "3942f270257ef98a42403857a687794e7c9ba057846a9b66678117e23455b687",
       "matchesSource": true
     }
   ]
