@@ -1,56 +1,45 @@
-# Task 03 — Mobile app prototype design
+# Task 03 - Mobile app prototype
 
-**THE SAVIOUR / Patient** is a high fidelity, interactive mobile UI/UX prototype derived from the [Task 1 wireframes](https://www.figma.com/design/OoIJIHcTxCjIO37I3FHNom). Open `index.html`; no dependencies or setup are required.
+THE SAVIOUR explores a short patient request journey with review, clear status, and recoverable failures. This submission is a working design prototype with seven screens, not an emergency dispatch service.
 
-**Safety boundary:** No request leaves the page. There is no location detection, hospital integration, dispatch, ambulance assignment, or ETA. Do not enter a real address or contact number. The `tel:112` link offers a real call path in India; this app is not an emergency service.
+[Live prototype](https://auspify-task-03.vercel.app/) | [Evaluation checklist](EVALUATION.md) | [Design rationale](DESIGN.md) | [User flow](user-flow.svg)
 
-## User journey and screen map
+![Interactive patient journey](evidence/03-mobile-review.jpg)
 
-```mermaid
-flowchart TD
-  A["Start / sample pickup"] --> B["Details / category and contact"]
-  B --> C["Review / edit"]
-  C -->|Local demo record| D["Waiting / no provider contacted"]
-  C -->|Simulated failure| F["Not recorded / retry"]
-  F --> D
-  D -->|Simulate response| E["Acceptance simulated"]
-  E --> A
+## Try the complete flow
+
+1. Edit the sample pickup and start a sample request.
+2. Choose a category, enter `0000000000`, and add an optional sample note.
+3. Go back and return: the unfinished draft remains. Review and edit before recording.
+4. Explore send failure and retry, local recording, no response and recovery, then simulated acceptance.
+5. Start a new demo to clear the previous contact, category, and note.
+
+Browser Back and Forward retain the draft. Refresh resets this in-memory demonstration. A direct status URL cannot manufacture a recorded request or provider response. The call link remains available on every screen; it was inspected without placing a call.
+
+## Deliverables
+
+| File | Purpose |
+| --- | --- |
+| `index.html`, `styles.css`, `app.js` | High-fidelity responsive screens and interactive prototype |
+| `journey.js` | Draft, validation, and guarded demonstration state |
+| `user-flow.svg` | Original, accessible flow diagram with alternate paths |
+| `DESIGN.md` | Screen inventory, decisions, and refinement log |
+| `EVALUATION.md` | All five Task 3 steps and seven PDF evaluation criteria |
+| `tests/journey.test.cjs` | Seven state, validation, and escaping checks |
+| `evidence/` | Twelve browser screenshots and 15 recorded browser checks |
+
+## Run locally
+
+Serve this folder with a static server. With Node.js installed:
+
+```powershell
+npx --yes http-server . -p 8765 -c-1
 ```
 
-Six states cover the full hypothesis journey: start, details, review, local waiting, simulated acceptance, and failure recovery. The failure path retains form information. The waiting and acceptance states explicitly distinguish browser-local actions from verified service activity.
+Open `http://localhost:8765/`. The prototype itself has no package dependencies or build step.
 
-## Design system and reusable patterns
+```powershell
+node --test tests/journey.test.cjs
+```
 
-| Element | Decision |
-| --- | --- |
-| Typography | System sans for fast loading and clear controls; strong size hierarchy. |
-| Ink / canvas | `#102c3a` on white; calm information hierarchy. |
-| Teal | `#087b78` for informative progress and simulated continuation. |
-| Red | `#bd3938` for the main request action and explicit warning. |
-| Controls | At least 48 px high with visible focus treatment. |
-| Components | Shared header, step label, notices, primary/secondary actions, summary rows, timeline, footer call link. |
-| Layout | Full-screen mobile experience; device presentation and explanatory panel on desktop. |
-
-The visual concept prioritizes unambiguous copy and one main action per step. It avoids a fake live map or an invented ETA. A two-screen visual design reference was generated before implementation; the coded screens retain its palette, typography hierarchy, disclosure, and touch scale.
-
-## Brief and evaluation checklist
-
-| Requirement | Evidence |
-| --- | --- |
-| User flow diagram | Mermaid map above and six distinct states. |
-| High fidelity screens | Responsive HTML/CSS screens from start through failure and simulated acceptance. |
-| Interactive prototype | Form validation, editable details, review, two send outcomes, recovery, simulated response, restart. |
-| Test navigation and interactions | Internal desktop and mobile walkthrough; see protocol below. |
-| Refine experience | Meaningful no-delivery language, retained details on failure, clear call alternative, keyboard focus. |
-| Code quality / responsiveness / UI / functionality | Dependency-free source, semantic labels and buttons, mobile layout, explicit state guards. |
-
-## Verification protocol
-
-1. Start from a sample pickup point, edit it, then enter a fictitious 10-digit number and select a category.
-2. Review and edit details; verify that the updated values appear on review.
-3. Simulate failure; verify that the text says nothing was sent, Call 112 is visible, and retry retains details.
-4. Retry to the local waiting screen; simulate acceptance; verify that the screen never claims an actual hospital response or ETA.
-5. Start over. Repeat on a 375 px screen and with keyboard navigation. Verify empty/invalid contact validation.
-
-This is a prototype walkthrough, not a usability study with participants. Real user testing, screen reader testing, field validation, and integration review are required before production design decisions.
-
+Validation on 16 November 2026: **7/7 automated checks and 15/15 internal browser checks passed**. Requested viewports: 320, 390, and 768 pixels, plus the desktop browser. These are internal design and implementation checks, not a participant usability study. See the checklist for scope and evidence.

@@ -1,0 +1,43 @@
+{
+  "verifiedAt": "2026-11-16T16:20:10.295Z",
+  "deploymentId": "dpl_7N5SMBa1SokXxCwJDz7uztjGxoGj",
+  "state": "READY",
+  "url": "https://auspify-task-03.vercel.app/",
+  "files": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 2126,
+      "sha256": "ae859ceca1d1d1d81f5c5794820349dd7a496f77d127582e0e9e03e29d94a20c",
+      "matchesSource": true
+    },
+    {
+      "file": "styles.css",
+      "status": 200,
+      "bytes": 7686,
+      "sha256": "63f24b986abcfa090916bb81b0e8d1b796af1711a3631d6f98f154660852a624",
+      "matchesSource": true
+    },
+    {
+      "file": "journey.js",
+      "status": 200,
+      "bytes": 2289,
+      "sha256": "d6fc472d6e18de8a34ea21d35458ccb2114851f6662095f41f4b1743bbd57861",
+      "matchesSource": true
+    },
+    {
+      "file": "app.js",
+      "status": 200,
+      "bytes": 8686,
+      "sha256": "66acf2216b2a00b6b17c707b604e5c42e090be11a6f5ac88e5610e737c198e42",
+      "matchesSource": true
+    },
+    {
+      "file": "user-flow.svg",
+      "status": 200,
+      "bytes": 4049,
+      "sha256": "d7ec63060bd1faf098934473b3344bbbfe236ac278af23fecc6d26fb0688888a",
+      "matchesSource": true
+    }
+  ]
+}

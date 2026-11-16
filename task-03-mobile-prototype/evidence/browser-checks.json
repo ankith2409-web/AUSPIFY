@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-16",
+  "method": "Internal browser walkthrough; no participant study",
+  "checks": [
+    {
+      "name": "Task 3 whitespace location explains error and focuses input",
+      "pass": true,
+      "detail": {
+        "error": "Enter a sample pickup location to continue.",
+        "focus": "pickup",
+        "invalid": "true"
+      }
+    },
+    {
+      "name": "Task 3 invalid sample contact has actionable feedback",
+      "pass": true,
+      "detail": {
+        "error": "Enter exactly 10 fictitious digits, for example 0000000000.",
+        "focus": "contact"
+      }
+    },
+    {
+      "name": "Task 3 Back retains category, note, and populated sample contact",
+      "pass": true,
+      "detail": {
+        "category": "Road accident",
+        "contactPresent": true,
+        "note": "Draft access note"
+      }
+    },
+    {
+      "name": "Task 3 mobile layout has no document overflow",
+      "pass": true,
+      "detail": {
+        "height": 844,
+        "scroll": 375,
+        "width": 375
+      }
+    },
+    {
+      "name": "Task 3 retained draft reaches review",
+      "pass": true
+    },
+    {
+      "name": "Task 3 failure shows retry and retained details",
+      "pass": true
+    },
+    {
+      "name": "Task 3 no-response recovery offers call, review, and retry",
+      "pass": true
+    },
+    {
+      "name": "Task 3 no-response review retains the sample note",
+      "pass": true
+    },
+    {
+      "name": "Task 3 acceptance remains explicitly simulated",
+      "pass": true
+    },
+    {
+      "name": "Task 3 explicit new demo clears the previous draft",
+      "pass": true,
+      "detail": {
+        "category": "Medical emergency",
+        "contactEmpty": true,
+        "noteEmpty": true
+      }
+    },
+    {
+      "name": "Task 3 direct response link cannot imply acceptance",
+      "pass": true
+    },
+    {
+      "name": "Task 3 320px requested viewport has no document overflow",
+      "pass": true,
+      "detail": {
+        "scroll": 305,
+        "width": 305
+      }
+    },
+    {
+      "name": "Task 3 browser Back and Forward preserve the draft",
+      "pass": true
+    },
+    {
+      "name": "Task 3 skip link preserves the current screen",
+      "pass": true
+    },
+    {
+      "name": "Task 3 tablet layout has no document overflow",
+      "pass": true,
+      "detail": {
+        "scroll": 768,
+        "width": 768
+      }
+    }
+  ]
+}

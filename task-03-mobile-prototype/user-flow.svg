@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1080" viewBox="0 0 1000 1080" role="img" aria-labelledby="title description">
+<title id="title">THE SAVIOUR patient prototype user flow</title><desc id="description">Start, enter details and review. Record locally to explore acceptance or no response. A failed recording can retry. Back and Edit retain drafts. Start a new demo clears them. Call 112 is available on every app screen.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2c7474"/></marker><style>text{font-family:Arial,sans-serif;fill:#102c3a} .node{fill:#fff;stroke:#a9c2c1;stroke-width:2;rx:10}.line{fill:none;stroke:#2c7474;stroke-width:2;marker-end:url(#arrow)}.label{font-size:14px;fill:#3b6268}.name{font-size:21px;font-weight:700}.copy{font-size:15px;fill:#526b73}</style></defs>
+<rect width="1000" height="1080" fill="#f1f6f4"/><rect width="1000" height="114" fill="#102c3a"/>
+<text x="35" y="43" style="fill:#8fd4cd;font-size:13px;letter-spacing:2px">TASK 03 / USER FLOW</text><text x="35" y="80" style="fill:#fff;font-size:27px;font-weight:700">A clear path, including recovery.</text>
+<rect class="node" x="340" y="150" width="320" height="80"/><text class="name" x="365" y="183">01 Start</text><text class="copy" x="365" y="209">Sample pickup / validate location</text>
+<path class="line" d="M500 230V278"/><text class="label" x="515" y="261">Continue</text>
+<rect class="node" x="340" y="280" width="320" height="90"/><text class="name" x="365" y="315">02 Details</text><text class="copy" x="365" y="342">Category / sample contact / note</text>
+<path class="line" d="M500 370V418"/><text class="label" x="515" y="399">Validate 10 sample digits</text>
+<rect class="node" x="340" y="420" width="320" height="80"/><text class="name" x="365" y="453">03 Review</text><text class="copy" x="365" y="479">Edit retains entered details</text>
+<path class="line" d="M500 500V568"/><text class="label" x="515" y="540">Record sample</text>
+<path class="line" d="M340 460H160V568"/><text class="label" x="45" y="445">Simulate send failure</text>
+<rect class="node" x="30" y="570" width="260" height="100" style="stroke:#bd3938"/><text class="name" x="50" y="605">Not recorded</text><text class="copy" x="50" y="632">Details retained / retry or edit</text>
+<rect class="node" x="340" y="570" width="320" height="100"/><text class="name" x="360" y="605">04 Recorded locally</text><text class="copy" x="360" y="632">No provider has received this</text>
+<path class="line" d="M290 630H338"/><text class="label" x="293" y="615">Retry</text>
+<path class="line" d="M660 610H708"/><text class="label" x="730" y="530">Simulate</text><text class="label" x="730" y="551">acceptance</text>
+<rect class="node" x="710" y="570" width="260" height="100"/><text class="name" x="730" y="605">05 Acceptance</text><text class="copy" x="730" y="632">Simulated / no ETA or dispatch</text>
+<path class="line" d="M500 670V768"/><text class="label" x="515" y="718">Simulate no response</text>
+<rect class="node" x="340" y="770" width="320" height="100" style="stroke:#bd3938"/><text class="name" x="360" y="805">No response</text><text class="copy" x="360" y="832">Call / retry / review retained details</text>
+<path class="line" d="M340 820H310V690H410V672"/><text class="label" x="229" y="748">Retry locally</text>
+<path d="M660 450H685V325H662" class="line" stroke-dasharray="6 5"/><text class="label" x="700" y="388">Edit</text>
+<rect x="30" y="925" width="940" height="117" rx="10" fill="#102c3a"/><text x="55" y="960" style="fill:#fff;font-size:20px;font-weight:700">Available throughout: Call 112 for a real emergency in India</text><text x="55" y="989" style="fill:#c7d8dc;font-size:15px">Back and Edit preserve the draft. Start a new demo clears it. Refresh resets this page.</text><text x="55" y="1015" style="fill:#c7d8dc;font-size:15px">Every request, response, and recovery state above is a local simulation.</text>
+</svg>
