@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-16",
+  "method": "Internal browser walkthrough; no participant study",
+  "checks": [
+    {
+      "name": "Task 4 weekly metrics reconcile with category counts",
+      "pass": true,
+      "detail": {
+        "categoryCounts": [
+          6,
+          7,
+          5,
+          6,
+          5
+        ],
+        "metrics": [
+          "29",
+          "86.2%",
+          "16 min",
+          "17"
+        ],
+        "scroll": 1265,
+        "width": 1265
+      }
+    },
+    {
+      "name": "Task 4 monthly charts and metrics use the same range",
+      "pass": true,
+      "detail": {
+        "categoryCounts": [
+          21,
+          21,
+          20,
+          20,
+          19
+        ],
+        "chart": "1-7 Jan: 21 incidents; 8-14 Jan: 21 incidents; 15-21 Jan: 21 incidents; 22-28 Jan: 29 incidents; 29-31 Jan: 9 incidents",
+        "focus": "period",
+        "metrics": [
+          "101",
+          "85.1%",
+          "16 min",
+          "59"
+        ]
+      }
+    },
+    {
+      "name": "Task 4 keyboard range change retains focus",
+      "pass": true,
+      "detail": {
+        "focus": "period"
+      }
+    },
+    {
+      "name": "Task 4 chart has a readable table alternative",
+      "pass": true
+    },
+    {
+      "name": "Task 4 register paginates month records",
+      "pass": true,
+      "detail": {
+        "rowsIncludingHeader": 26
+      }
+    },
+    {
+      "name": "Task 4 status keyboard change retains focus",
+      "pass": true,
+      "detail": {
+        "focus": "status",
+        "status": "Completed"
+      }
+    },
+    {
+      "name": "Task 4 search retains typing focus and returns rows",
+      "pass": true,
+      "detail": {
+        "focus": "search",
+        "ids": [
+          "INC-02489",
+          "INC-02481",
+          "INC-02580",
+          "INC-02469",
+          "INC-02461",
+          "INC-02453",
+          "INC-02441",
+          "INC-02433",
+          "INC-02425",
+          "INC-02413",
+          "INC-02405"
+        ]
+      }
+    },
+    {
+      "name": "Task 4 detail keeps Incidents selected in navigation",
+      "pass": true
+    },
+    {
+      "name": "Task 4 Back retains search status and range",
+      "pass": true,
+      "detail": {
+        "count": "11 of 101 records match / newest first",
+        "period": "month",
+        "query": "Riverside General",
+        "status": "Completed"
+      }
+    },
+    {
+      "name": "Task 4 actual CSV contains the selected 11 records",
+      "pass": true,
+      "detail": {
+        "dataRows": 11
+      }
+    },
+    {
+      "name": "Task 4 empty export is disabled",
+      "pass": true
+    },
+    {
+      "name": "Task 4 empty results recover without changing range",
+      "pass": true
+    },
+    {
+      "name": "Task 4 mobile contains table overflow inside its region",
+      "pass": true,
+      "detail": {
+        "scroll": 375,
+        "tableScroll": 880,
+        "tableWidth": 305,
+        "width": 375
+      }
+    },
+    {
+      "name": "Task 4 mobile navigation opens with selected section focused",
+      "pass": true
+    },
+    {
+      "name": "Task 4 Escape closes mobile menu and returns focus",
+      "pass": true,
+      "detail": {
+        "expanded": "false",
+        "focus": "menu"
+      }
+    },
+    {
+      "name": "Task 4 facility assignment counts reconcile with acceptance",
+      "pass": true,
+      "detail": {
+        "assigned": 86
+      }
+    },
+    {
+      "name": "Task 4 facility action opens matching records",
+      "pass": true
+    },
+    {
+      "name": "Task 4 320px requested viewport has no document overflow",
+      "pass": true,
+      "detail": {
+        "scroll": 305,
+        "width": 305
+      }
+    },
+    {
+      "name": "Task 4 tablet layout has no document overflow",
+      "pass": true,
+      "detail": {
+        "scroll": 753,
+        "width": 753
+      }
+    },
+    {
+      "name": "Task 4 skip link preserves the current section",
+      "pass": true
+    }
+  ]
+}

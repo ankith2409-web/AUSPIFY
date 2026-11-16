@@ -1,53 +1,44 @@
-# Task 04 — Dashboard UI/UX design
+# Task 04 - Operations dashboard
 
-**THE SAVIOUR / Operations** is an interactive dashboard design prototype. All incidents, metrics, facilities, dates, and status values are **fictional sample data**. It has no connection to real emergency systems and must not guide operational decisions.
+THE SAVIOUR turns a fictional incident register into an overview, searchable records, facility assignments, and a filtered CSV export. All dates, counts, and charts derive from the same archived sample dataset.
 
-Open `index.html` in a browser. No build, API key, database, or account is needed.
+[Live dashboard](https://auspify-task-04.vercel.app/) | [Evaluation checklist](EVALUATION.md) | [Research and definitions](RESEARCH.md)
 
-## Desk research
+![Operations dashboard](evidence/01-desktop-overview.jpg)
 
-- [GOV.UK dashboard guidance](https://brand.design-system.service.gov.uk/data/dashboards/) describes dashboards as high-level indicator views and calls for careful hierarchy and concise explanation. This informed the summary-first layout and separate record detail.
-- [W3C WAI table tutorial](https://www.w3.org/WAI/tutorials/tables/) explains why header relationships matter for accessible data tables. The register uses semantic column headers rather than a visual grid of divs.
+## Review the workflow
 
-These are design references, not competitor testing or research with dispatch staff. A real operational design requires participant interviews, verified data definitions, and institutional review.
+1. Switch between the sample week and January. Cards, charts, recent records, and facility counts follow the selected range.
+2. Open Incidents, search, filter by status, and use pagination. Open a record and return without losing the selection.
+3. Open Facilities and inspect the records assigned to a facility.
+4. Open Reports. The same range, search, and status apply. Download every matching row, including results on other pages.
+5. Try an empty search, clear the filters, and test navigation on mobile using the menu and Escape.
 
-## Workflow and design decisions
+The dataset contains 101 invented records across January 2025; 29 belong to 18-24 January. There are no live incidents, patient identities, or dispatch actions.
 
-| Required step | Evidence |
+## Source and evidence
+
+| File | Purpose |
 | --- | --- |
-| Research dashboard structures | A high-level overview answers *what changed?*; the register answers *which records need attention?*; detail views provide context; facilities and reports have separate navigation. This is a design rationale, not user research. |
-| Design navigation menus and widgets | Persistent desktop sidebar, collapsible mobile navigation, range selector, summary metrics, status counts, search and status filters. |
-| Create charts, cards and tables | Daily/weekly incident volume, category breakdown, four summary metrics, facility cards, searchable incident register, detail page. |
-| Improve accessibility and usability | Semantic headings/table headers, descriptive chart text, visible focus indicators, keyboard buttons, responsive overflow for wide tables, explicit sample-data labels and empty state. |
-| Build clickable prototype | Overview → incidents → detail → back; facilities and reports; filter, search, range change and local CSV export. |
+| `index.html`, `styles.css`, `app.js` | Responsive clickable dashboard |
+| `data.js` | Deterministic fixtures, shared selection, metrics, charts, and CSV logic |
+| `RESEARCH.md` | Primary-source desk research, design inferences, metric definitions, refinements |
+| `EVALUATION.md` | All five Task 4 steps and seven PDF evaluation criteria |
+| `tests/data.test.cjs` | Nine data and export regression checks |
+| `evidence/` | Twelve real browser screenshots, 20 browser checks, and the downloaded 11-row CSV |
 
-### Information architecture
+## Run locally
 
-```mermaid
-flowchart TD
-  A["Overview: metrics / charts / recent cases"] --> B["Incidents: search / status filter"]
-  B --> C["Incident detail"]
-  A --> D["Facilities: sample status"]
-  A --> E["Reports: local CSV export"]
+Serve this folder with a static server. With Node.js installed:
+
+```powershell
+npx --yes http-server . -p 8766 -c-1
 ```
 
-The chart and categories use a coherent illustrative weekly total of 428. The alternate month view uses a separate weekly series; its category panel explicitly keeps the example weekly breakdown. The eight incident rows are illustrative examples, not the full set behind the aggregate numbers.
+Open `http://localhost:8766/`. The application itself has no package dependencies or build step.
 
-## Evaluation criteria
+```powershell
+node --test tests/data.test.cjs
+```
 
-| Criterion | Evidence and limitation |
-| --- | --- |
-| Task completion | All five workflow steps represented as a working concept. No formal participant research. |
-| Code quality | Dependency-free HTML/CSS/JS, structured data arrays and distinct render functions; `node --check app.js` passes. |
-| Responsiveness | Desktop sidebar, mobile menu, wrapping summary, stacked panels, scrollable table. Browser QA required. |
-| Interface design | Consistent palette, type hierarchy, spacing, labelled controls, data disclosure. |
-| Creativity and implementation | Operational clarity without pretending synthetic data is live; meaningful chart alternative text and local export. |
-| Professional presentation | Source, rationale, information architecture, clear limitations and verification plan. |
-| Functionality | Range change, navigation, filtering, search, record detail and CSV download operate entirely in-browser. |
-
-## Verification plan
-
-Check the desktop and 375 px mobile layout; switch time range and confirm metrics/charts update; open the incident register and search `INC-02584`; filter to Completed; open a detail record and navigate back; inspect facilities; download CSV and check that it contains eight fictional records. Check keyboard navigation and the chart's text alternative. This is an internal walkthrough; a usability study with participants has not been conducted.
-
-For submission, include screenshots of desktop and mobile screens, the source folder and its branch link. The internship brief makes video optional.
-
+Validation on 16 November 2026: **9/9 automated checks and 20/20 internal browser checks passed**. The actual downloaded CSV matched the 11 selected records. Desktop, tablet, and mobile layouts were inspected. These checks do not constitute a participant study or a full accessibility conformance audit.

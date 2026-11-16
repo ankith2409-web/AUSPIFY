@@ -1,2 +1,35 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102234"><meta name="description" content="THE SAVIOUR operations dashboard design prototype with fictional sample data."><title>THE SAVIOUR — Operations dashboard</title><link rel="stylesheet" href="styles.css"><script defer src="app.js"></script></head><body><a class="skip" href="#content">Skip to content</a><div class="shell"><aside class="sidebar"><a class="logo" href="#overview"><span class="mark">✳</span><span>THE SAVIOUR<small>Operations / concept</small></span></a><nav aria-label="Dashboard navigation"><a href="#overview" data-nav="overview">▦ <span>Overview</span></a><a href="#incidents" data-nav="incidents">◷ <span>Incidents</span></a><a href="#facilities" data-nav="facilities">▥ <span>Facilities</span></a><a href="#reports" data-nav="reports">▥ <span>Reports</span></a></nav><p class="sidebar-note">Design prototype<br>Fictional sample data<br>No live dispatch connection</p></aside><div class="workspace"><header class="topbar"><button class="mobile-menu" id="menu" aria-label="Open navigation" aria-expanded="false">☰</button><span>THE SAVIOUR <i>/</i> Operations</span><span class="sample">SAMPLE DATA</span></header><main id="content" tabindex="-1"></main><footer>THE SAVIOUR / Operations · Fictional UI/UX prototype · No real incident or facility information</footer></div></div><div id="announce" class="sr-only" role="status" aria-live="polite"></div></body></html>
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102234">
+  <meta name="description" content="THE SAVIOUR operations dashboard, an interactive design prototype with fictional sample records.">
+  <title>THE SAVIOUR - Operations dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="shell">
+    <aside class="sidebar" id="navigation">
+      <a class="logo" href="#overview"><span class="mark" aria-hidden="true">&#10035;</span><span>THE SAVIOUR<small>Operations / concept</small></span></a>
+      <nav aria-label="Dashboard navigation">
+        <a href="#overview" data-nav="overview"><b aria-hidden="true">&#9638;</b><span>Overview</span></a>
+        <a href="#incidents" data-nav="incidents"><b aria-hidden="true">&#9671;</b><span>Incidents</span></a>
+        <a href="#facilities" data-nav="facilities"><b aria-hidden="true">+</b><span>Facilities</span></a>
+        <a href="#reports" data-nav="reports"><b aria-hidden="true">&#8801;</b><span>Reports</span></a>
+      </nav>
+      <p class="sidebar-note">Design prototype<br>Fictional January 2025 records<br>No live dispatch connection</p>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><button class="mobile-menu" id="menu" aria-label="Open navigation" aria-expanded="false" aria-controls="navigation">&#9776;</button><span>THE SAVIOUR <i>/</i> Operations</span><span class="sample">SAMPLE DATA</span></header>
+      <main id="content" tabindex="-1"></main>
+      <noscript><p class="notice">Enable JavaScript to explore the sample dashboard.</p></noscript>
+      <footer>THE SAVIOUR / Operations &middot; Fictional UI/UX prototype &middot; No real incident or facility information</footer>
+    </div>
+  </div>
+  <div id="announce" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "verifiedAt": "2026-11-16T16:20:17.935Z",
+  "deploymentId": "dpl_ijjk7HYsts3DxL89KZ7hadQiAYpQ",
+  "state": "READY",
+  "url": "https://auspify-task-04.vercel.app/",
+  "files": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 2074,
+      "sha256": "cac9e0726f16930ecdd80ae9a93c978653d8cd5b9f0691d80bf912fafdbb0aaf",
+      "matchesSource": true
+    },
+    {
+      "file": "styles.css",
+      "status": 200,
+      "bytes": 10962,
+      "sha256": "71f6ba96712f84d958511b7a13d2dc2ab11f62502fc6afb6b47949c07b667c24",
+      "matchesSource": true
+    },
+    {
+      "file": "data.js",
+      "status": 200,
+      "bytes": 4246,
+      "sha256": "89413a0b19602feac1b8a7a20da33aa3d3e47d44b85525dd4443d2791900c93c",
+      "matchesSource": true
+    },
+    {
+      "file": "app.js",
+      "status": 200,
+      "bytes": 13938,
+      "sha256": "a4b4fda884ee8dc3e7ec4d4d420975e39cb04c90c67afe75dff4cf535bbc3d45",
+      "matchesSource": true
+    }
+  ]
+}

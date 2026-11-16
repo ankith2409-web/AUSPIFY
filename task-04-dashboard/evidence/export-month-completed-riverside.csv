@@ -1,0 +1,12 @@
+id,category,priority,area,facility,minutes,status,created
+"INC-02489","Accident / trauma","Medium","West End / Zone A","Riverside General","12","Completed","2025-01-30 12:16"
+"INC-02481","Medical / non-critical","Low","Riverside / Zone A","Riverside General","10","Completed","2025-01-27 16:20"
+"INC-02580","Medical / critical","High","Hillcrest / Zone B","Riverside General","13","Completed","2025-01-24 10:22"
+"INC-02469","Accident / trauma","Low","West End / Zone A","Riverside General","16","Completed","2025-01-23 16:56"
+"INC-02461","Medical / non-critical","High","Riverside / Zone A","Riverside General","14","Completed","2025-01-21 08:00"
+"INC-02453","Transport / transfer","Medium","Northview / Zone C","Riverside General","12","Completed","2025-01-18 12:04"
+"INC-02441","Medical / non-critical","Medium","Riverside / Zone A","Riverside General","18","Completed","2025-01-14 12:40"
+"INC-02433","Transport / transfer","Low","Northview / Zone C","Riverside General","16","Completed","2025-01-11 16:44"
+"INC-02425","Other","High","Hillcrest / Zone B","Riverside General","14","Completed","2025-01-09 08:48"
+"INC-02413","Transport / transfer","High","Northview / Zone C","Riverside General","20","Completed","2025-01-05 08:24"
+"INC-02405","Other","Medium","Hillcrest / Zone B","Riverside General","18","Completed","2025-01-02 12:28"

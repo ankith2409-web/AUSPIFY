@@ -1,31 +1,131 @@
-const incidents=[
-  {id:'INC-02584',category:'Medical · critical',priority:'High',area:'Riverside · Zone A',facility:'Riverside General',minutes:12,status:'In progress',created:'2025-01-24 14:26'},
-  {id:'INC-02583',category:'Transport / transfer',priority:'Medium',area:'Lakeside · Zone B',facility:'Lakeside Medical',minutes:18,status:'Accepted',created:'2025-01-24 13:58'},
-  {id:'INC-02582',category:'Accident / trauma',priority:'High',area:'Northview · Zone C',facility:'Northview Regional',minutes:15,status:'Accepted',created:'2025-01-24 12:47'},
-  {id:'INC-02581',category:'Medical · non-critical',priority:'Low',area:'West End · Zone A',facility:'West End Community',minutes:20,status:'Completed',created:'2025-01-24 11:36'},
-  {id:'INC-02580',category:'Medical · critical',priority:'High',area:'Hillcrest · Zone B',facility:'Riverside General',minutes:13,status:'Completed',created:'2025-01-24 10:22'},
-  {id:'INC-02579',category:'Other',priority:'Low',area:'Lakeside · Zone B',facility:'Lakeside Medical',minutes:16,status:'Waiting',created:'2025-01-23 16:10'},
-  {id:'INC-02578',category:'Accident / trauma',priority:'High',area:'Northview · Zone C',facility:'Northview Regional',minutes:11,status:'In progress',created:'2025-01-23 14:20'},
-  {id:'INC-02577',category:'Medical · non-critical',priority:'Medium',area:'West End · Zone A',facility:'West End Community',minutes:19,status:'Completed',created:'2025-01-22 09:05'}
-];
-const facilities=[{name:'Riverside General',zone:'Zone A',status:'Online',sampleCases:124},{name:'Lakeside Medical',zone:'Zone B',status:'Online',sampleCases:92},{name:'Northview Regional',zone:'Zone C',status:'Online',sampleCases:115},{name:'West End Community',zone:'Zone A',status:'Online',sampleCases:97}];
-const weekly=[48,52,61,67,64,72,64],monthly=[410,392,441,428];
-const categories=[['Medical · non-critical',180],['Medical · critical',80],['Transport / transfer',60],['Accident / trauma',52],['Other',56]];
-const main=document.querySelector('#content');let period='week',query='',status='All statuses';
-const pill=s=>`<span class="pill ${s.toLowerCase().replaceAll(' ','').replace('inprogress','progress')}">${s}</span>`;
-const title=(name,description,control='')=>`<div class="heading-row"><div><h1>${name}</h1><p>${description}</p></div>${control}</div>`;
-const range=()=>`<label class="range">Time range<select id="period"><option value="week">18–24 Jan 2025</option><option value="month">January 2025</option></select></label>`;
-function table(rows){return `<div class="table-scroll"><table class="data-table"><thead><tr><th scope="col">Incident ID</th><th scope="col">Category</th><th scope="col">Priority</th><th scope="col">Origin area</th><th scope="col">Assigned facility</th><th scope="col">Handoff</th><th scope="col">Status</th><th scope="col">Created</th></tr></thead><tbody>${rows.map(i=>`<tr><td><button class="id-button" data-id="${i.id}">${i.id}</button></td><td>${i.category}</td><td>${pill(i.priority)}</td><td>${i.area}</td><td>${i.facility}</td><td>${i.minutes} min</td><td>${pill(i.status)}</td><td>${i.created}</td></tr>`).join('')}</tbody></table>${rows.length?'':'<p class="empty">No sample incidents match these filters.</p>'}</div>`}
-function chart(values,labels){const max=Math.max(...values)*1.18;return `<div class="chart" role="img" aria-label="${labels.map((l,n)=>`${l}: ${values[n]} incidents`).join(', ')}">${values.map(v=>`<div class="bar-group"><div class="bar" style="height:${v/max*100}%"><span>${v}</span></div></div>`).join('')}</div><div class="axis" aria-hidden="true">${labels.map(l=>`<span>${l}</span>`).join('')}</div>`}
-function overview(){const month=period==='month',values=month?monthly:weekly,labels=month?['Week 1','Week 2','Week 3','Week 4']:['Sat 18','Sun 19','Mon 20','Tue 21','Wed 22','Thu 23','Fri 24'],total=values.reduce((a,b)=>a+b,0);main.innerHTML=`<div class="content">${title('Operations overview','Fictional coordination analytics for interface demonstration only.',range())}<section class="metrics" aria-label="Summary metrics"><div class="metric"><span>Incidents · sample</span><strong>${total.toLocaleString()}</strong><small>${month?'January 2025':'18–24 January 2025'}</small></div><div class="metric"><span>Acceptance rate · sample</span><strong>${month?'95.8%':'96.3%'}</strong><small>Illustrative aggregate</small></div><div class="metric"><span>Median handoff · sample</span><strong>${month?'15':'14'} min</strong><small>Illustrative aggregate</small></div><div class="metric"><span>Open cases · sample</span><strong>${month?'31':'27'}</strong><small>Illustrative snapshot</small></div></section><div class="panels"><section class="panel"><div class="panel-header"><div><h2>Incident volume</h2><p>${month?'Weekly totals across January':'Daily totals for the selected week'} · sample data</p></div><span class="legend"><b></b>Incidents</span></div>${chart(values,labels)}</section><section class="panel"><div class="panel-header"><div><h2>Incidents by category</h2><p>${month?'Illustrative weekly breakdown shown for comparison':'Share of 428 sample incidents'}</p></div></div><div class="breakdown">${categories.map(([n,v])=>`<div class="break-row"><span>${n}</span><span class="track"><i style="width:${v/180*100}%"></i></span><strong>${Math.round(v/428*100)}%</strong></div>`).join('')}</div></section></div><section class="panel"><div class="table-head"><div><h2>Recent incidents</h2><p>Fictional records with no real identifiers.</p></div><a class="text-link" href="#incidents">View all incidents →</a></div>${table(incidents.slice(0,5))}</section><div class="bottom" style="margin-top:18px"><section class="panel"><h2>Facility status · sample</h2><p>Illustrative capacity snapshot.</p><div class="facility-summary"><div><strong>4</strong><span>Online</span></div><div><strong>0</strong><span>Limited</span></div><div><strong>0</strong><span>Offline</span></div></div></section><section class="panel"><h2>About this data</h2><p style="margin-top:12px;line-height:1.7">Every metric and record on this page is invented for a UI/UX internship prototype. This dashboard is not connected to emergency services and must not be used for operational decisions.</p></section></div></div>`;document.querySelector('#period').value=period}
-function incidentPage(){const filtered=incidents.filter(i=>(status==='All statuses'||i.status===status)&&Object.values(i).join(' ').toLowerCase().includes(query.toLowerCase()));main.innerHTML=`<div class="content">${title('Incidents','Search and review fictional coordination records.')}<div class="controls"><input id="search" type="search" aria-label="Search incidents" placeholder="Search ID, category, area or facility" value="${query.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}"><select id="status" aria-label="Filter by status">${['All statuses','Waiting','Accepted','In progress','Completed'].map(x=>`<option ${x===status?'selected':''}>${x}</option>`).join('')}</select></div><section class="panel"><div class="panel-header"><div><h2>Incident register</h2><p>${filtered.length} of ${incidents.length} sample records</p></div></div>${table(filtered)}</section><p class="notice" style="margin-top:18px">Illustrative records only. No real names, addresses, or live dispatch state are displayed.</p></div>`}
-function facilityPage(){main.innerHTML=`<div class="content">${title('Facilities','A conceptual view of participating facilities.')}<div class="facility-list">${facilities.map(f=>`<article class="facility-card"><h2>${f.name}</h2>${pill(f.status)}<p>${f.zone} · ${f.sampleCases} sample assigned incidents</p><p>No live availability or capacity information.</p></article>`).join('')}</div><p class="notice" style="margin-top:18px">These facilities and counts are fictional. Facility names, availability and assignments require verified integration in a real service.</p></div>`}
-function reportsPage(){main.innerHTML=`<div class="content">${title('Reports','A clear export of the fictional incident register.')}<div class="report-layout"><section class="panel"><h2>Sample incident report</h2><p style="margin:12px 0 20px;line-height:1.7">Download the eight fictional rows shown in the incident register as CSV. Values are for design demonstration only.</p><button class="primary" id="export">Download sample CSV</button></section><div class="notice">No user or patient data is stored or transmitted by this prototype. The CSV is generated locally in your browser.</div></div></div>`}
-function detail(id){const i=incidents.find(x=>x.id===id);if(!i)return notFound();main.innerHTML=`<div class="content"><a class="back" href="#incidents">← Back to incidents</a>${title(i.id,'Fictional incident detail · sample data')}<section class="panel" style="max-width:760px"><div class="panel-header"><h2>Coordination summary</h2>${pill(i.status)}</div><dl class="detail-list">${[['Category',i.category],['Priority',i.priority],['Origin area',i.area],['Assigned facility',i.facility],['Handoff duration',`${i.minutes} minutes`],['Created',i.created]].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section><p class="notice" style="max-width:760px;margin-top:18px">This is a fabricated record. No actual service action can be taken here.</p></div>`}
-function notFound(){main.innerHTML='<div class="content"><h1>Page not found</h1><a href="#overview">Back to overview</a></div>'}
-function route(){const page=(location.hash.slice(1)||'overview').split('/')[0];if(page==='overview')overview();else if(page==='incidents')incidentPage();else if(page==='facilities')facilityPage();else if(page==='reports')reportsPage();else if(page==='detail')detail(location.hash.split('/')[1]);else notFound();document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===page)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});document.querySelector('.sidebar').classList.remove('open');document.querySelector('#menu').setAttribute('aria-expanded','false');document.querySelector('#menu').setAttribute('aria-label','Open navigation');main.focus({preventScroll:true});scrollTo({top:0,behavior:'instant'})}
-document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;if(t.id==='menu'){const open=document.querySelector('.sidebar').classList.toggle('open');t.setAttribute('aria-expanded',String(open));t.setAttribute('aria-label',open?'Close navigation':'Open navigation')}if(t.dataset.id)location.hash=`#detail/${t.dataset.id}`;if(t.id==='export'){const keys=['id','category','priority','area','facility','minutes','status','created'];const csv=[keys.join(','),...incidents.map(i=>keys.map(k=>`"${String(i[k]).replaceAll('"','""')}"`).join(','))].join('\r\n');const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));link.download='the-saviour-sample-incidents.csv';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);document.querySelector('#announce').textContent='Sample report downloaded'}});
-document.addEventListener('change',e=>{if(e.target.id==='period'){period=e.target.value;overview()}if(e.target.id==='status'){status=e.target.value;incidentPage()}});
-document.addEventListener('input',e=>{if(e.target.id==='search'){query=e.target.value;const start=e.target.selectionStart;incidentPage();const field=document.querySelector('#search');field.focus();field.setSelectionRange(start,start)}});
-addEventListener('hashchange',route);route();
-
+const D = Dashboard, clean = D.escape, main = document.querySelector('#content');
+const selection = {period:'week',query:'',status:'All statuses'};
+let pageNumber = 1;
+const pageSize = 25;
+const rows = () => D.select(selection);
+const cohort = () => D.select({period:selection.period});
+const pill = value => `<span class="pill ${value.toLowerCase().replaceAll(' ','').replace('inprogress','progress')}">${clean(value)}</span>`;
+const range = () => `<label class="range">Time range<select id="period">${Object.entries(D.ranges).map(([key,value]) => `<option value="${key}"${key === selection.period ? ' selected' : ''}>${value.label}</option>`).join('')}</select></label>`;
+const title = (name,description,controls = true) => `<div class="heading-row"><div><h1 tabindex="-1">${clean(name)}</h1><p>${description}</p></div>${controls ? range() : ''}</div>`;
+const filters = () => `<div class="controls"><label class="search-field"><span class="sr-only">Search incidents</span><input id="search" type="search" placeholder="Search ID, category, area or facility" value="${clean(selection.query)}"></label><label><span class="sr-only">Filter by status</span><select id="status">${['All statuses',...D.statuses].map(value => `<option${value === selection.status ? ' selected' : ''}>${value}</option>`).join('')}</select></label><button class="secondary" id="clear">Clear filters</button></div>`;
+function table(records, caption = 'Fictional incident records') {
+  if (!records.length) return '<div class="empty"><h3>No matching incidents</h3><p>Try another search, status, or time range.</p><button class="secondary" id="empty-clear">Clear search and status</button></div>';
+  const columns = ['Incident ID','Category','Priority','Origin area','Assigned facility','Response time','Status','Created'];
+  return `<div class="table-scroll" role="region" aria-label="${clean(caption)}; scroll horizontally for more columns" tabindex="0"><table class="data-table"><caption class="sr-only">${clean(caption)}</caption><thead><tr>${columns.map(label => `<th scope="col">${label}</th>`).join('')}</tr></thead><tbody>${records.map(i => `<tr><th scope="row"><a class="id-button" href="#detail/${i.id}">${i.id}</a></th><td>${clean(i.category)}</td><td>${pill(i.priority)}</td><td>${clean(i.area)}</td><td>${clean(i.facility)}</td><td>${i.minutes === null ? 'Not received' : `${i.minutes} min`}</td><td>${pill(i.status)}</td><td>${i.created}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function chart(records) {
+  const values = D.buckets(records,selection.period), max = Math.max(1,...values.map(v => v.count));
+  return `<p class="chart-scale">Incidents / zero baseline</p><div class="chart" role="img" aria-label="${values.map(v => `${v.label}: ${v.count} incidents`).join('; ')}">${values.map(v => `<div class="bar-group"><div class="bar" style="height:${v.count / max * 82}%"><span>${v.count}</span></div></div>`).join('')}</div><div class="axis" aria-hidden="true">${values.map(v => `<span>${v.label}</span>`).join('')}</div><details class="chart-data"><summary>View chart data</summary><table><caption>Incident volume / ${D.ranges[selection.period].label}</caption><thead><tr><th scope="col">Date</th><th scope="col">Incidents</th></tr></thead><tbody>${values.map(v => `<tr><th scope="row">${v.label}</th><td>${v.count}</td></tr>`).join('')}</tbody></table></details>`;
+}
+function overview() {
+  const records = cohort(), m = D.metrics(records);
+  return `${title('Operations overview','An archived, fictional dataset. Every widget uses the selected time range.')}<section class="metrics" aria-label="Summary metrics"><div class="metric"><span>Incidents</span><strong>${m.total}</strong><small>${D.ranges[selection.period].label}</small></div><div class="metric"><span>Acceptance rate</span><strong>${m.acceptance.toFixed(1)}%</strong><small>${m.accepted} of ${m.total} accepted or later</small></div><div class="metric"><span>Median response</span><strong>${m.median} min</strong><small>Excludes waiting records</small></div><div class="metric"><span>Open cases</span><strong>${m.open}</strong><small>Not marked completed</small></div></section><div class="panels"><section class="panel"><div class="panel-header"><div><h2>Incident volume</h2><p>${selection.period === 'month' ? 'Calendar date groups; final group has 3 days' : 'Daily counts, 18-24 January'} / sample data</p></div><span class="legend"><b></b>Incidents</span></div>${chart(records)}</section><section class="panel"><h2>Incidents by category</h2><p>Count and share of ${m.total} selected records</p><div class="breakdown">${D.breakdown(records).map(v => `<div class="break-row"><span>${v.label}</span><span class="track" aria-hidden="true"><i style="width:${v.count / m.total * 100}%"></i></span><strong>${v.count}<small>${(v.count / m.total * 100).toFixed(1)}%</small></strong></div>`).join('')}</div><p class="chart-note">Bars show share of all selected incidents (0-100%). Percentages are rounded.</p></section></div><section class="panel"><div class="table-head"><div><h2>Recent incidents</h2><p>Newest 5 of ${m.total} selected records.</p></div><a class="text-link" href="#incidents">View incident register &#8594;</a></div>${table(records.slice(0,5),'Recent incidents')}</section><div class="bottom"><section class="panel"><h2>How to read these metrics</h2><p class="explanation">Acceptance includes Accepted, In progress, and Completed. Response time is the sample delay to provider response. Open cases belong to this date cohort, not a live queue.</p><a class="text-link" href="#facilities">Review facility assignments &#8594;</a></section><section class="panel"><h2>About this data</h2><p class="explanation">101 invented January 2025 records, including 29 in the sample week. No live incidents, patient identities, provider availability, or dispatch actions.</p><a class="text-link" href="https://github.com/ankith2409-web/AUSPIFY/blob/task/04-dashboard/task-04-dashboard/RESEARCH.md">Design decisions and data definitions &#8599;</a></section></div>`;
+}
+function register() {
+  const filtered = rows(), count = filtered.length, pages = Math.max(1,Math.ceil(count / pageSize));
+  pageNumber = Math.min(pageNumber,pages);
+  const start = (pageNumber - 1) * pageSize;
+  return `${title('Incidents','Find a record, inspect its details, then return to your selection.')}${filters()}<section class="panel"><div class="panel-header"><div><h2>Incident register</h2><p id="result-count">${count} of ${cohort().length} records match / newest first</p></div><a class="text-link" href="#reports">Export selection &#8594;</a></div>${table(filtered.slice(start,start + pageSize))}${count ? `<div class="pagination"><button class="secondary" id="previous"${pageNumber === 1 ? ' disabled' : ''}>Previous</button><span>Page ${pageNumber} of ${pages} / ${start+1}-${Math.min(start+pageSize,count)} of ${count}</span><button class="secondary" id="next"${pageNumber === pages ? ' disabled' : ''}>Next</button></div>` : ''}</section>`;
+}
+function facilities() {
+  const records = cohort(), assigned = records.filter(i => i.facility !== 'Unassigned').length;
+  return `${title('Facilities','Assignments from the same date cohort as the overview.')}<p class="notice">${assigned} assigned / ${records.length-assigned} unassigned. These are fictional providers; availability is not measured.</p><div class="facility-list">${D.facilities.map(f => {const matches = records.filter(i => i.facility === f.name);return `<article class="facility-card"><h2>${f.name}</h2><p>${f.zone}</p><strong class="facility-count">${matches.length}</strong><p>Assigned sample incidents</p><p>${matches.filter(i => i.status !== 'Completed').length} not completed in this cohort</p><button class="secondary" data-facility="${f.name}">View assigned records</button></article>`;}).join('')}</div>`;
+}
+function reports() {
+  const count = rows().length;
+  return `${title('Reports','Export the complete filtered selection, including every result page.')}${filters()}<div class="report-layout"><section class="panel"><h2>Incident selection</h2><p class="explanation">${count} of ${cohort().length} records / ${D.ranges[selection.period].label}<br>Status: ${selection.status}<br>Search: ${clean(selection.query.trim() || 'None')}</p><button class="primary" id="export"${count ? '' : ' disabled'}>Download ${count} records as CSV</button><a class="text-link report-back" href="#incidents">Review selected records &#8594;</a></section><p class="notice">Generated in your browser from invented sample records. Waiting records have no assigned facility or response time. This is an archived design demonstration.</p></div>`;
+}
+function detail(id) {
+  const record = D.incidents.find(i => i.id === id);
+  if (!record) return `${title('Record not found','This record does not exist in the sample dataset.',false)}<a class="back" href="#incidents">Back to incident register</a>`;
+  const fields = [['Category',record.category],['Priority',record.priority],['Origin area',record.area],['Assigned facility',record.facility],['Provider response',record.minutes === null ? 'Not received' : `${record.minutes} minutes`],['Created',`${record.created} / sample local time`]];
+  return `<a class="back" href="#incidents">&#8592; Back to incidents</a>${title(record.id,'Fictional coordination record / no service action is available.',false)}<section class="panel detail-panel"><div class="panel-header"><h2>Coordination summary</h2>${pill(record.status)}</div><dl class="detail-list">${fields.map(([key,value]) => `<dt>${key}</dt><dd>${clean(value)}</dd>`).join('')}</dl></section><p class="notice detail-panel">Search, status, time range, and register page are retained when you go back.</p>`;
+}
+function page() { return (location.hash.slice(1) || 'overview').split('/')[0]; }
+function render(focusId, caret) {
+  const current = page(), pages = {overview,incidents:register,facilities,reports};
+  const content = current === 'detail' ? detail(location.hash.split('/')[1]) : pages[current]?.() || `${title('Page not found','Choose a dashboard section.',false)}<a href="#overview">Back to overview</a>`;
+  main.innerHTML = `<div class="content">${content}</div>`;
+  document.querySelectorAll('[data-nav]').forEach(a => {
+    if (a.dataset.nav === (current === 'detail' ? 'incidents' : current)) a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
+  });
+  if (focusId) {
+    const target = document.getElementById(focusId);
+    target?.focus({preventScroll:true});
+    if (caret !== undefined) target?.setSelectionRange(caret,caret);
+  }
+  document.title = `${main.querySelector('h1').textContent} | THE SAVIOUR dashboard`;
+}
+function closeMenu(returnFocus = false) {
+  document.querySelector('.sidebar').classList.remove('open');
+  const menu = document.querySelector('#menu');
+  menu.setAttribute('aria-expanded','false');
+  menu.setAttribute('aria-label','Open navigation');
+  if (returnFocus) menu.focus();
+}
+function route() {
+  closeMenu();
+  render();
+  main.querySelector('h1').focus({preventScroll:true});
+  scrollTo({top:0,behavior:'instant'});
+}
+function announce(message) { document.querySelector('#announce').textContent = message; }
+function clearFilters() { selection.query = ''; selection.status = 'All statuses'; pageNumber = 1; render('search'); announce(`${rows().length} records match`); }
+function download() {
+  const filtered = rows();
+  if (!filtered.length) return;
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(new Blob([D.csv(filtered)],{type:'text/csv;charset=utf-8'}));
+  link.download = `the-saviour-${selection.period}-${filtered.length}-sample-records.csv`;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href),1000);
+  announce(`CSV generated with ${filtered.length} fictional records`);
+}
+// Delegation keeps the handlers stable while panels are replaced.
+document.addEventListener('click', event => {
+  if (event.target.closest('.skip')) { event.preventDefault(); main.querySelector('h1').focus(); return; }
+  const button = event.target.closest('button');
+  if (!button) { if (!event.target.closest('.sidebar')) closeMenu(); return; }
+  if (button.id === 'menu') {
+    const open = document.querySelector('.sidebar').classList.toggle('open');
+    button.setAttribute('aria-expanded',String(open));
+    button.setAttribute('aria-label',open ? 'Close navigation' : 'Open navigation');
+    if (open) document.querySelector('[aria-current="page"]')?.focus();
+  } else if (['clear','empty-clear'].includes(button.id)) clearFilters();
+  else if (['previous','next'].includes(button.id)) {
+    pageNumber += button.id === 'next' ? 1 : -1;
+    render();
+    main.querySelector('h1').focus({preventScroll:true});
+    announce(`Page ${pageNumber}; ${rows().length} records match`);
+  } else if (button.id === 'export') download();
+  else if (button.dataset.facility) {
+    selection.query = button.dataset.facility;
+    selection.status = 'All statuses';
+    pageNumber = 1;
+    location.hash = 'incidents';
+  }
+});
+document.addEventListener('change', event => {
+  if (!['period','status'].includes(event.target.id)) return;
+  selection[event.target.id] = event.target.value;
+  pageNumber = 1;
+  render(event.target.id);
+  announce(`${rows().length} records match ${D.ranges[selection.period].label}`);
+});
+document.addEventListener('input', event => {
+  if (event.target.id !== 'search') return;
+  selection.query = event.target.value;
+  const caret = event.target.selectionStart;
+  pageNumber = 1;
+  render('search',caret);
+  announce(`${rows().length} records match`);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && document.querySelector('#menu').getAttribute('aria-expanded') === 'true') closeMenu(true);
+});
+document.addEventListener('focusin', event => {
+  if (!event.target.closest('.sidebar') && event.target.id !== 'menu') closeMenu();
+});
+addEventListener('hashchange',route);
+route();
