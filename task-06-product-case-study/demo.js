@@ -35,6 +35,11 @@ let state = load();
 let patientDraft = {location: "KR Puram, Bengaluru", category: "Medical emergency", note: ""};
 let vehicleDraft = "KA 03 AB 1234";
 const acknowledged = request => request.events.some(item => item.label === "Traffic control acknowledged route");
+
+function trafficStatus(request) {
+  if (acknowledged(request)) return "Route alert acknowledged in this demo.";
+  return request.status === "arrived" ? "Ambulance arrived without a traffic acknowledgement." : "No traffic acknowledgement yet.";
+}
 let role = new URLSearchParams(location.search).get("role");
 if (!roles[role]) role = "patient";
 const call = '<a class="emergency-link" href="tel:112">Call 112 for a real emergency <span aria-hidden="true">↗</span></a>';
@@ -61,9 +66,9 @@ function patientView(request) {
       <li class="done"><strong>Request created</strong><span>Stored in this browser only.</span></li>
       <li class="${request.status !== "submitted" ? "done" : ""}"><strong>Hospital acceptance</strong><span>${request.hospital ? clean(request.hospital) : "Waiting for hospital view."}</span></li>
       <li class="${["enroute", "route_acknowledged", "arrived"].includes(request.status) ? "done" : ""}"><strong>Ambulance dispatch</strong><span>${request.vehicle ? clean(request.vehicle) : "Not dispatched yet."}</span></li>
-      <li class="${acknowledged(request) ? "done" : ""}"><strong>Traffic acknowledgement</strong><span>${acknowledged(request) ? "Acknowledged in demo." : "No acknowledgement yet."}</span></li>
+      <li class="${acknowledged(request) ? "done" : ""}"><strong>Traffic acknowledgement</strong><span>${trafficStatus(request)}</span></li>
       <li class="${request.status === "arrived" ? "done" : ""}"><strong>Ambulance arrival</strong><span>${request.status === "arrived" ? "Marked arrived in this demo." : "Not marked arrived yet."}</span></li>
-    </ol></div>${request.status === "arrived" ? '<div class="completion"><strong>Handoff completed</strong><p>Pickup, hospital, and vehicle details remain available above.</p><button class="secondary" type="button" data-action="clear">Start a new demo</button></div>' : ""}${call}<p class="fine-print">No actual request has been sent. The status above reflects only actions taken in this browser.</p>`;
+    </ol></div>${request.status === "arrived" ? `<div class="completion"><strong>Handoff completed</strong><p>${trafficStatus(request)}</p><button class="secondary" type="button" data-action="clear">Start a new demo</button></div>` : ""}${call}<p class="fine-print">No actual request has been sent. The status above reflects only actions taken in this browser.</p>`;
 }
 
 function hospitalView(request) {
@@ -72,7 +77,7 @@ function hospitalView(request) {
     ${requestCard(request)}
     ${request.status === "submitted" ? `<div class="action-panel"><h4>Decision</h4><p>Accept this sample request to notify the patient view.</p><button type="button" class="primary" data-action="accept">Accept request <span aria-hidden="true">→</span></button></div>` : ""}
     ${request.status === "accepted" ? `<form id="dispatch-form" class="action-panel"><h4>Dispatch ambulance</h4><label for="vehicle">Vehicle identifier</label><input id="vehicle" name="vehicle" required minlength="3" maxlength="32" value="${clean(vehicleDraft)}"><p>Enter a sample identifier. No vehicle is actually dispatched.</p><button type="submit" class="primary">Mark ambulance en route <span aria-hidden="true">→</span></button></form>` : ""}
-    ${["enroute", "route_acknowledged"].includes(request.status) ? `<div class="action-panel"><h4>Ambulance progress</h4><p>The patient and traffic views now show the sample dispatch.</p><button type="button" class="secondary" data-action="arrive">Mark ambulance arrived</button></div>` : ""}
+    ${["enroute", "route_acknowledged"].includes(request.status) ? `<div class="action-panel"><h4>Ambulance progress</h4><p>Record arrival when the sample vehicle reaches its destination. Traffic acknowledgement is recorded separately.</p><button type="button" class="secondary" data-action="arrive">Mark ambulance arrived</button></div>` : ""}
     ${request.status === "arrived" ? `<div class="completion"><strong>Handoff completed</strong><p>The vehicle was marked arrived in this browser demo.</p></div>` : ""}`;
 }
 
