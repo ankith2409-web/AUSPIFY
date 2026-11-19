@@ -68,3 +68,16 @@ The brief mentions dashboard design tools but does not restrict submission to a 
 ## Deployment verification
 
 The existing Vercel project was redeployed to production and reported READY. The public dashboard was opened; the month summary and enabled 11-record filtered export were checked. All four deployed web assets returned HTTP 200 and matched the local source byte for byte. See the [deployment hashes](evidence/deployment.json) and [production browser record](evidence/production-browser.json).
+
+## Submission evidence refresh · 20 November 2026
+
+The incident register surfaces status beside the incident ID. The exact facility filter also controls the export. The refreshed view shows 11 completed Riverside General incidents for January.
+
+The screenshots below were recaptured from the revised prototype. Earlier evidence files are historical.
+
+- [03-desktop-register.jpg](evidence/03-desktop-register.jpg)
+- [05-desktop-export.jpg](evidence/05-desktop-export.jpg)
+- [06-desktop-empty.jpg](evidence/06-desktop-empty.jpg)
+- [07-mobile-register.jpg](evidence/07-mobile-register.jpg)
+- [11-small-mobile-register.jpg](evidence/11-small-mobile-register.jpg)
+- [12-tablet-register.jpg](evidence/12-tablet-register.jpg)
