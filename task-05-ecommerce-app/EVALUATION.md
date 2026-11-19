@@ -62,3 +62,14 @@ All are actual browser captures using invented sample information. They are not 
 Conduct the sessions in USABILITY-TEST.md, record actual observations in participant-results.csv, revise observed problems and retest affected tasks. Also untested: screen readers, physical phones, other browser engines, storage-disabled behavior and conflicting simultaneous bag edits. The bag-storage fallback is implemented but not claimed as browser-tested.
 
 A client can review the working prototype now. They should not be told that all workflow requirements are finished or that the design is error-free.
+
+## Submission evidence refresh · 20 November 2026
+
+The checkout fills only empty fields with fictional details, keeps existing entries, and explains that finishing clears the bag. The bag labels the total as including shipping. Participant testing remains outstanding.
+
+The screenshots below were recaptured from the revised prototype. Earlier evidence files are historical.
+
+- [05-bag.jpg](screenshots/05-bag.jpg)
+- [05-checkout-mobile.jpg](screenshots/05-checkout-mobile.jpg)
+- [05-checkout.jpg](screenshots/05-checkout.jpg)
+- [05-validation.jpg](screenshots/05-validation.jpg)
