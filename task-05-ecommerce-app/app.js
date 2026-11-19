@@ -32,6 +32,10 @@ function readCart() {
   } catch { storageAvailable = false; return {}; }
 }
 let cart = readCart(), filter = 'All objects', sort = 'featured';
+const sampleDetails = {
+  email: 'shopper@example.test', first: 'Sample', last: 'Shopper',
+  address: '12 Example Road', city: 'Bengaluru', postal: '560000', country: 'India'
+};
 let checkoutDraft = {};
 const lines = () => products.filter(product => cart[product.id]).map(product => ({...product, qty:cart[product.id]}));
 const count = () => Object.values(cart).reduce((total, qty) => total + qty, 0);
@@ -92,13 +96,14 @@ function renderCart() {
 }
 function renderCheckout() {
   if (!count()) { location.hash = '#/cart'; return; }
-  const input = (id, label, autocomplete, type = 'text') => `<div class="field"><label for="${id}">${label}</label><input id="${id}" name="${id}" type="${type}" autocomplete="${autocomplete}" maxlength="160" required value="${escapeHtml(checkoutDraft[id])}" ${type === 'text' ? 'pattern=".*\\S.*" title="Enter a value containing text."' : ''}></div>`;
+  const input = (id, label, type = 'text') => `<div class="field"><label for="${id}">${label}</label><input id="${id}" name="${id}" type="${type}" autocomplete="off" maxlength="160" required value="${escapeHtml(checkoutDraft[id])}" ${type === 'text' ? 'pattern=".*\\S.*" title="Enter a value containing text."' : ''}></div>`;
   main.innerHTML = `<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span><a href="#/cart">Bag</a><span>/</span>Checkout</div>
     <h1 class="page-title">Checkout</h1><p class="page-intro">Use sample details to try the checkout. All fields are required.</p>
-    <div class="checkout-layout"><form id="checkout-form" novalidate>
-      <section class="form-section"><h2>Contact</h2>${input('email', 'Email address', 'email', 'email')}</section>
-      <section class="form-section"><h2>Delivery address</h2><div class="field-grid">${input('first', 'First name', 'given-name')}${input('last', 'Last name', 'family-name')}</div>
-      ${input('address', 'Street address', 'street-address')}<div class="field-grid">${input('city', 'City', 'address-level2')}${input('postal', 'Postal code', 'postal-code')}</div>
+    <div class="checkout-layout"><form id="checkout-form" autocomplete="off" novalidate>
+      <button class="solid-button" id="fill-sample" type="button">Fill sample details</button>
+      <section class="form-section"><h2>Contact</h2>${input('email', 'Email address', 'email')}</section>
+      <section class="form-section"><h2>Delivery address</h2><div class="field-grid">${input('first', 'First name')}${input('last', 'Last name')}</div>
+      ${input('address', 'Street address')}<div class="field-grid">${input('city', 'City')}${input('postal', 'Postal code')}</div>
       <div class="field"><label for="country">Country</label><select id="country" name="country" required><option value="">Select country</option>${['India', 'United States', 'United Kingdom'].map(country => `<option ${checkoutDraft.country === country ? 'selected' : ''}>${country}</option>`).join('')}</select></div></section>
       <div class="notice">Prototype checkout. No payment details are requested. Submitting shows a sample confirmation; no order is placed and no address is sent to a server. Your entries stay in page memory until confirmation or refresh.</div>
       <p class="form-error" id="form-error" role="alert" hidden></p><button class="solid-button" type="submit">Review sample confirmation</button></form>${summary(true)}</div></div>`;
@@ -140,6 +145,18 @@ document.addEventListener('click', event => {
     filter = button.dataset.filter; renderShop();
     main.querySelector(`[data-filter="${filter}"]`).focus();
     announce(`${main.querySelector('.results').textContent} in ${filter}.`);
+  }
+  if (button.id === 'fill-sample') {
+    checkoutDraft = {...sampleDetails};
+    const form = button.form;
+    for (const [name, value] of Object.entries(sampleDetails)) {
+      const field = form.elements.namedItem(name);
+      field.value = value;
+      field.removeAttribute('aria-invalid');
+    }
+    form.querySelector('#form-error').hidden = true;
+    announce('Fictional checkout details filled. You can review or edit them before continuing.');
+    return;
   }
   if (button.dataset.add) {
     add(button.dataset.add);
