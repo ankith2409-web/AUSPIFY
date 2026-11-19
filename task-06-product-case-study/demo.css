@@ -183,3 +183,6 @@ fieldset legend { grid-column: 1 / -1; margin-bottom: 11px; }
   .sidebar-bottom .signal, .sidebar-bottom p { display: none; }
   .sidebar-bottom button { min-height: 44px; }
 }
+
+
+#clear-dialog{width:min(420px,calc(100% - 32px));padding:24px;border:1px solid #c7ddd8;border-radius:16px;color:#153532;background:#fff}#clear-dialog::backdrop{background:#10242199}#clear-dialog h2{margin:0 0 8px}#clear-dialog .form-actions{margin-top:20px}

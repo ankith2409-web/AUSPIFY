@@ -131,6 +131,18 @@ function apply(action, data) {
   }
 }
 
+const clearDialog = document.querySelector("#clear-dialog");
+let requestToClear;
+
+clearDialog.addEventListener("submit", event => {
+  event.preventDefault();
+  clearDialog.close();
+  if (event.submitter?.value !== "clear") return;
+  const current = storageAvailable ? load(state) : state;
+  if (current.request?.id !== requestToClear) return;
+  apply("clear");
+});
+
 document.addEventListener("click", event => {
   const roleButton = event.target.closest("[data-role]");
   if (roleButton) {
@@ -142,8 +154,14 @@ document.addEventListener("click", event => {
     return;
   }
   const action = event.target.closest("[data-action]");
+  if (action?.dataset.action === "clear" || event.target.closest("#reset")) {
+    const current = storageAvailable ? load(state) : state;
+    requestToClear = current.request?.id;
+    clearDialog.returnValue = "";
+    clearDialog.showModal();
+    return;
+  }
   if (action) apply(action.dataset.action);
-  if (event.target.closest("#reset")) apply("clear");
 });
 
 document.addEventListener("submit", event => {
