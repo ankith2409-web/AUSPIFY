@@ -66,3 +66,16 @@ A Figma or Adobe XD source file was not created in this reevaluation. The brief 
 ## Deployment verification
 
 The existing Vercel project was redeployed to production and reported READY. The public page was opened and its revised workflow checked. All five deployed web assets returned HTTP 200 and matched the local source byte for byte. The [deployment record](evidence/deployment.json) includes SHA-256 hashes; the [production browser record](evidence/production-browser.json) records the live no-response scenario and observed console output.
+
+## Submission evidence refresh · 20 November 2026
+
+The start screen explains when the sample draft clears. Failed send and waiting for a response have distinct headings and explanations, with retained details in the recovery flow.
+
+The screenshots below were recaptured from the revised prototype. Earlier evidence files are historical.
+
+- [01-desktop-start.jpg](evidence/01-desktop-start.jpg)
+- [04-mobile-failure.jpg](evidence/04-mobile-failure.jpg)
+- [05-mobile-recorded.jpg](evidence/05-mobile-recorded.jpg)
+- [06-mobile-no-response.jpg](evidence/06-mobile-no-response.jpg)
+- [08-mobile-start.jpg](evidence/08-mobile-start.jpg)
+- [11-small-mobile-start.jpg](evidence/11-small-mobile-start.jpg)
