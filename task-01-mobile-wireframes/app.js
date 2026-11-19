@@ -16,7 +16,7 @@ const views = [
     <form id="details">
       <div class="field"><label for="location">Patient location</label><input id="location" name="location" required maxlength="120" value="${escapeText(state.location)}"></div>
       <fieldset class="field"><legend>What kind of help?</legend>${['Medical emergency', 'Accident / injury', 'Other / unsure'].map(value => `<label class="radio"><input type="radio" name="type" value="${value}" ${state.type === value ? 'checked' : ''}>${value}</label>`).join('')}</fieldset>
-      <div class="field"><label for="contact">Contact number · sample</label><input id="contact" name="contact" type="tel" autocomplete="off" required maxlength="30" value="${escapeText(state.contact)}"></div>
+      <div class="field"><label for="contact">Contact number · sample</label><input id="contact" name="contact" type="tel" inputmode="numeric" autocomplete="off" required maxlength="10" pattern="[0-9]{10}" aria-describedby="contact-hint contact-error" value="${escapeText(state.contact)}"><small id="contact-hint">Use 10 fictional digits, such as 0000000000.</small><p id="contact-error" class="notice" hidden>Enter 10 digits for the sample contact.</p></div>
       <div class="field"><label for="note">Optional note</label><textarea id="note" name="note" maxlength="240" placeholder="Sample landmark or brief details">${escapeText(state.note)}</textarea></div>
       <div class="actions"><button class="action" type="submit">Review request</button>${action('Back to home', 0, true)}</div>
     </form>`,
@@ -56,7 +56,19 @@ function retainDraft(form) {
   for (const key of ['location', 'type', 'contact', 'note']) state[key] = String(data.get(key) || '');
 }
 
-document.addEventListener('input', event => { if (event.target.form?.id === 'details') retainDraft(event.target.form); });
+document.addEventListener('invalid', event => {
+  if (event.target.id !== 'contact') return;
+  screen.querySelector('#contact-error').hidden = false;
+  event.target.setAttribute('aria-invalid', 'true');
+}, true);
+document.addEventListener('input', event => {
+  if (event.target.form?.id !== 'details') return;
+  retainDraft(event.target.form);
+  if (event.target.id === 'contact' && event.target.validity.valid) {
+    screen.querySelector('#contact-error').hidden = true;
+    event.target.removeAttribute('aria-invalid');
+  }
+});
 document.addEventListener('change', event => { if (event.target.form?.id === 'details') retainDraft(event.target.form); });
 document.addEventListener('click', event => {
   if (event.target.closest('[data-call]')) {
@@ -77,4 +89,3 @@ document.addEventListener('submit', event => {
   render(2);
 });
 render(0, false);
-
