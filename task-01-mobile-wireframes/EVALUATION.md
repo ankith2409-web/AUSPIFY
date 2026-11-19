@@ -62,4 +62,13 @@ Source, screenshots and branch/folder are included. Video is optional. The initi
 
 Temporary Vercel sharing is not a dependable permanent submission artifact. Generating another public share link was blocked by automatic approval review after the audit resumed; no security setting was changed.
 
+## Submission evidence refresh · 20 November 2026
 
+The editable six-screen SVG and the walkthrough now both identify the prefilled sample pickup and explain that it can be edited on the next screen. The board also shows the 10-digit fictional contact hint.
+
+The screenshots below were recaptured from the revised prototype. Earlier evidence files are historical.
+
+- [01-home-desktop.jpg](screenshots/01-home-desktop.jpg)
+- [02-details.jpg](screenshots/02-details.jpg)
+- [07-mobile.jpg](screenshots/07-mobile.jpg)
+- [08-wireframes-board.jpg](screenshots/08-wireframes-board.jpg)
