@@ -68,3 +68,14 @@ These are actual internal browser captures with sample data, not physical-device
 Research is currently secondary. The personas and staff roles are hypotheses. Follow USABILITY-TEST.md to collect actual observations and challenge the service premise with authorized staff. No participant-success, satisfaction, response-time, clinical or dispatch improvement is claimed.
 
 Also untested: physical devices, screen readers, other engines, storage-disabled/corrupt-data recovery and unreliable networks. No cross-device service exists. This is a functional UI/UX concept; operational readiness and institutional integration require separate work.
+
+## Submission evidence refresh · 20 November 2026
+
+The demo records arrival and traffic acknowledgement separately, including arrival without acknowledgement. The reset confirmation preserves the handoff if canceled. Firsthand research and participant validation remain outstanding.
+
+The screenshots below were recaptured from the revised prototype. Earlier evidence files are historical.
+
+- [06-arrival.jpg](screenshots/06-arrival.jpg)
+- [06-clear-confirmation.jpg](screenshots/06-clear-confirmation.jpg)
+- [06-completed-mobile.jpg](screenshots/06-completed-mobile.jpg)
+- [06-completed.jpg](screenshots/06-completed.jpg)
