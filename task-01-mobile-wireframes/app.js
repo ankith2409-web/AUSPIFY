@@ -8,10 +8,10 @@ const title = (heading, sub) => `<h2 tabindex="-1">${heading}</h2><p class="sub"
 const call = '<button class="action secondary" type="button" data-call>Call emergency services</button>';
 const views = [
   () => `${title('Get help quickly', 'Explore a sample ambulance request flow.')}
-    <div class="map">MAP / LOCATION PLACEHOLDER</div>
+    <div class="map">MAP / SAMPLE LOCATION</div>
     <div class="field"><p id="pickup-label" class="field-label">Sample pickup</p><div class="card" aria-labelledby="pickup-label">${escapeText(state.location)}</div></div>
     <div class="actions">${action('Request ambulance', 1)}${call}</div>
-    <p class="footnote">Check or correct the pickup on the next screen.</p>`,
+    <p class="footnote">This pickup is prefilled for the demo. You can edit it on the next screen.</p>`,
   () => `${title('Tell us what happened', 'Only essential details are needed. Use sample information.')}
     <form id="details">
       <div class="field"><label for="location">Patient location</label><input id="location" name="location" required maxlength="120" value="${escapeText(state.location)}"></div>
