@@ -82,7 +82,7 @@ function summary(checkout = false) {
   const sub = subtotal(), shipping = sub >= 300 ? 0 : 18;
   return `<aside class="summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal · ${count()} ${count() === 1 ? 'item' : 'items'}</span><strong>${money(sub)}</strong></div>
     <div class="summary-row"><span>Shipping</span><span>${shipping ? money(shipping) : 'Complimentary'}</span></div>
-    <p class="minor">$18 shipping; complimentary at $300.</p><div class="summary-row total"><span>Total</span><span>${money(sub + shipping)}</span></div>
+    <p class="minor">$18 shipping; complimentary at $300.</p><div class="summary-row total"><span>Total including shipping</span><span>${money(sub + shipping)}</span></div>
     ${checkout ? '' : '<a class="solid-button" href="#/checkout">Continue to checkout</a>'}<p class="minor">Illustrative prices in USD. No payment is taken.</p></aside>`;
 }
 function renderCart() {
@@ -100,13 +100,14 @@ function renderCheckout() {
   main.innerHTML = `<div class="page"><div class="breadcrumb"><a href="#/">Shop</a><span>/</span><a href="#/cart">Bag</a><span>/</span>Checkout</div>
     <h1 class="page-title">Checkout</h1><p class="page-intro">Use sample details to try the checkout. All fields are required.</p>
     <div class="checkout-layout"><form id="checkout-form" autocomplete="off" novalidate>
-      <button class="solid-button" id="fill-sample" type="button">Fill sample details</button>
+      <button class="solid-button" id="fill-sample" type="button" aria-describedby="sample-fill-hint">Fill sample details</button>
+      <p id="sample-fill-hint" class="minor">Fills empty fields with fictional details. Keeps what you have entered.</p>
       <section class="form-section"><h2>Contact</h2>${input('email', 'Email address', 'email')}</section>
       <section class="form-section"><h2>Delivery address</h2><div class="field-grid">${input('first', 'First name')}${input('last', 'Last name')}</div>
       ${input('address', 'Street address')}<div class="field-grid">${input('city', 'City')}${input('postal', 'Postal code')}</div>
       <div class="field"><label for="country">Country</label><select id="country" name="country" required><option value="">Select country</option>${['India', 'United States', 'United Kingdom'].map(country => `<option ${checkoutDraft.country === country ? 'selected' : ''}>${country}</option>`).join('')}</select></div></section>
-      <div class="notice">Prototype checkout. No payment details are requested. Submitting shows a sample confirmation; no order is placed and no address is sent to a server. Your entries stay in page memory until confirmation or refresh.</div>
-      <p class="form-error" id="form-error" role="alert" hidden></p><button class="solid-button" type="submit">Review sample confirmation</button></form>${summary(true)}</div></div>`;
+      <div class="notice">Prototype checkout. No payment details are requested. Finishing clears your bag and shows a sample confirmation. Your entries stay in page memory until confirmation or refresh.</div>
+      <p class="form-error" id="form-error" role="alert" hidden></p><button class="solid-button" type="submit">Finish sample checkout</button></form>${summary(true)}</div></div>`;
 }
 function renderSuccess() {
   main.innerHTML = `<section class="success"><span class="mark" aria-hidden="true">✳</span><h1>Thank you for exploring.</h1>
@@ -147,15 +148,17 @@ document.addEventListener('click', event => {
     announce(`${main.querySelector('.results').textContent} in ${filter}.`);
   }
   if (button.id === 'fill-sample') {
-    checkoutDraft = {...sampleDetails};
     const form = button.form;
-    for (const [name, value] of Object.entries(sampleDetails)) {
+    let filled = 0;
+    for (const [name, sample] of Object.entries(sampleDetails)) {
       const field = form.elements.namedItem(name);
-      field.value = value;
+      if (field.value.trim()) continue;
+      field.value = checkoutDraft[name] = sample;
       field.removeAttribute('aria-invalid');
+      filled++;
     }
     form.querySelector('#form-error').hidden = true;
-    announce('Fictional checkout details filled. You can review or edit them before continuing.');
+    announce(filled ? 'Empty fields filled with fictional details.' : 'There are no empty fields to fill.');
     return;
   }
   if (button.dataset.add) {
