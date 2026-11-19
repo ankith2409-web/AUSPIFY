@@ -60,4 +60,13 @@ Source, completed-page screenshots and the separate GitHub branch/folder fulfill
 
 Vercel's protected URLs and expiring shares are supplementary. Creating another public share link was rejected by automatic approval review after this audit resumed. No authentication setting was changed; the repository and screenshots remain the durable evidence.
 
+## Submission evidence refresh · 20 November 2026
 
+The main call to action opens the full walkthrough and previews its starting point. The embedded preview is labeled as a separate three-state preview.
+
+The screenshots below were recaptured from the revised prototype. Earlier evidence files are historical.
+
+- [01-desktop.jpg](screenshots/01-desktop.jpg)
+- [02-mobile-375.jpg](screenshots/02-mobile-375.jpg)
+- [03-mobile-320.jpg](screenshots/03-mobile-320.jpg)
+- [04-preview.jpg](screenshots/04-preview.jpg)
