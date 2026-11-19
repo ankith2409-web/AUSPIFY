@@ -26,9 +26,9 @@
     ['02577',0,'Medium',3,3,19,'Completed','22 09:05']
   ].map(([id,category,priority,area,facility,minutes,status,date]) => ({id:`INC-${id}`,category:categories[category],priority,area:areas[area],facility:facility < 0 ? 'Unassigned' : facilities[facility].name,minutes,status,created:`2025-01-${date}`}));
   const incidents = [...generated,...featured].sort((a,b) => b.created.localeCompare(a.created) || b.id.localeCompare(a.id));
-  function select({period='week',query='',status='All statuses'} = {}) {
+  function select({period='week',query='',status='All statuses',facility='' } = {}) {
     const range = ranges[period] || ranges.week, term = query.trim().toLowerCase();
-    return incidents.filter(i => i.created.slice(0,10) >= range.start && i.created.slice(0,10) <= range.end && (status === 'All statuses' || i.status === status) && Object.values(i).join(' ').toLowerCase().includes(term));
+    return incidents.filter(i => i.created.slice(0,10) >= range.start && i.created.slice(0,10) <= range.end && (status === 'All statuses' || i.status === status) && (!facility || i.facility === facility) && Object.values(i).join(' ').toLowerCase().includes(term));
   }
   function metrics(rows) {
     const times = rows.map(i => i.minutes).filter(Number.isFinite).sort((a,b) => a-b), half = Math.floor(times.length / 2);

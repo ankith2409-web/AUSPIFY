@@ -1,5 +1,5 @@
 const D = Dashboard, clean = D.escape, main = document.querySelector('#content');
-const selection = {period:'week',query:'',status:'All statuses'};
+const selection = {period:'week',query:'',status:'All statuses',facility:''};
 let pageNumber = 1;
 const pageSize = 25;
 const rows = () => D.select(selection);
@@ -7,11 +7,15 @@ const cohort = () => D.select({period:selection.period});
 const pill = value => `<span class="pill ${value.toLowerCase().replaceAll(' ','').replace('inprogress','progress')}">${clean(value)}</span>`;
 const range = () => `<label class="range">Time range<select id="period">${Object.entries(D.ranges).map(([key,value]) => `<option value="${key}"${key === selection.period ? ' selected' : ''}>${value.label}</option>`).join('')}</select></label>`;
 const title = (name,description,controls = true) => `<div class="heading-row"><div><h1 tabindex="-1">${clean(name)}</h1><p>${description}</p></div>${controls ? range() : ''}</div>`;
-const filters = () => `<div class="controls"><label class="search-field"><span class="sr-only">Search incidents</span><input id="search" type="search" placeholder="Search ID, category, area or facility" value="${clean(selection.query)}"></label><label><span class="sr-only">Filter by status</span><select id="status">${['All statuses',...D.statuses].map(value => `<option${value === selection.status ? ' selected' : ''}>${value}</option>`).join('')}</select></label><button class="secondary" id="clear">Clear filters</button></div>`;
+const facilityFilter = () => {
+  const names = [...D.facilities.map(item => item.name), 'Unassigned'];
+  return `<label><span class="sr-only">Filter by facility</span><select id="facility"><option value="">All facilities</option>${names.map(name => `<option${name === selection.facility ? ' selected' : ''}>${clean(name)}</option>`).join('')}</select></label>`;
+};
+const filters = () => `<div class="controls"><label class="search-field"><span class="sr-only">Search incidents</span><input id="search" type="search" placeholder="Search ID, category, area or facility" value="${clean(selection.query)}"></label><label><span class="sr-only">Filter by status</span><select id="status">${['All statuses',...D.statuses].map(value => `<option${value === selection.status ? ' selected' : ''}>${value}</option>`).join('')}</select></label>${facilityFilter()}<button class="secondary" id="clear">Clear filters</button></div>`;
 function table(records, caption = 'Fictional incident records') {
-  if (!records.length) return '<div class="empty"><h3>No matching incidents</h3><p>Try another search, status, or time range.</p><button class="secondary" id="empty-clear">Clear search and status</button></div>';
+  if (!records.length) return '<div class="empty"><h3>No matching incidents</h3><p>Try another search, status, or time range.</p><button class="secondary" id="empty-clear">Clear filters</button></div>';
   const columns = ['Incident ID','Category','Priority','Origin area','Assigned facility','Response time','Status','Created'];
-  return `<div class="table-scroll" role="region" aria-label="${clean(caption)}; scroll horizontally for more columns" tabindex="0"><table class="data-table"><caption class="sr-only">${clean(caption)}</caption><thead><tr>${columns.map(label => `<th scope="col">${label}</th>`).join('')}</tr></thead><tbody>${records.map(i => `<tr><th scope="row"><a class="id-button" href="#detail/${i.id}">${i.id}</a></th><td>${clean(i.category)}</td><td>${pill(i.priority)}</td><td>${clean(i.area)}</td><td>${clean(i.facility)}</td><td>${i.minutes === null ? 'Not received' : `${i.minutes} min`}</td><td>${pill(i.status)}</td><td>${i.created}</td></tr>`).join('')}</tbody></table></div>`;
+  return `<p class="table-hint">Swipe the table to see more columns.</p><div class="table-scroll" role="region" aria-label="${clean(caption)}; scroll horizontally for more columns" tabindex="0"><table class="data-table"><caption class="sr-only">${clean(caption)}</caption><thead><tr>${columns.map(label => `<th scope="col">${label}</th>`).join('')}</tr></thead><tbody>${records.map(i => `<tr><th scope="row"><a class="id-button" href="#detail/${i.id}">${i.id}</a></th><td>${clean(i.category)}</td><td>${pill(i.priority)}</td><td>${clean(i.area)}</td><td>${clean(i.facility)}</td><td>${i.minutes === null ? 'Not received' : `${i.minutes} min`}</td><td>${pill(i.status)}</td><td>${i.created}</td></tr>`).join('')}</tbody></table></div>`;
 }
 function chart(records) {
   const values = D.buckets(records,selection.period), max = Math.max(1,...values.map(v => v.count));
@@ -33,7 +37,7 @@ function facilities() {
 }
 function reports() {
   const count = rows().length;
-  return `${title('Reports','Export the complete filtered selection, including every result page.')}${filters()}<div class="report-layout"><section class="panel"><h2>Incident selection</h2><p class="explanation">${count} of ${cohort().length} records / ${D.ranges[selection.period].label}<br>Status: ${selection.status}<br>Search: ${clean(selection.query.trim() || 'None')}</p><button class="primary" id="export"${count ? '' : ' disabled'}>Download ${count} records as CSV</button><a class="text-link report-back" href="#incidents">Review selected records &#8594;</a></section><p class="notice">Generated in your browser from invented sample records. Waiting records have no assigned facility or response time. This is an archived design demonstration.</p></div>`;
+  return `${title('Reports','Export the complete filtered selection, including every result page.')}${filters()}<div class="report-layout"><section class="panel"><h2>Incident selection</h2><p class="explanation">${count} of ${cohort().length} records / ${D.ranges[selection.period].label}<br>Status: ${selection.status}<br>Facility: ${clean(selection.facility || 'All facilities')}<br>Search: ${clean(selection.query.trim() || 'None')}</p><button class="primary" id="export"${count ? '' : ' disabled'}>Download ${count} records as CSV</button><a class="text-link report-back" href="#incidents">Review selected records &#8594;</a></section><p class="notice">Generated in your browser from invented sample records. Waiting records have no assigned facility or response time. This is an archived design demonstration.</p></div>`;
 }
 function detail(id) {
   const record = D.incidents.find(i => i.id === id);
@@ -71,7 +75,7 @@ function route() {
   scrollTo({top:0,behavior:'instant'});
 }
 function announce(message) { document.querySelector('#announce').textContent = message; }
-function clearFilters() { selection.query = ''; selection.status = 'All statuses'; pageNumber = 1; render('search'); announce(`${rows().length} records match`); }
+function clearFilters() { selection.query = ''; selection.status = 'All statuses'; selection.facility = ''; pageNumber = 1; render('search'); announce(`${rows().length} records match`); }
 function download() {
   const filtered = rows();
   if (!filtered.length) return;
@@ -101,14 +105,15 @@ document.addEventListener('click', event => {
     announce(`Page ${pageNumber}; ${rows().length} records match`);
   } else if (button.id === 'export') download();
   else if (button.dataset.facility) {
-    selection.query = button.dataset.facility;
+    selection.query = '';
+    selection.facility = button.dataset.facility;
     selection.status = 'All statuses';
     pageNumber = 1;
     location.hash = 'incidents';
   }
 });
 document.addEventListener('change', event => {
-  if (!['period','status'].includes(event.target.id)) return;
+  if (!['period','status','facility'].includes(event.target.id)) return;
   selection[event.target.id] = event.target.value;
   pageNumber = 1;
   render(event.target.id);
