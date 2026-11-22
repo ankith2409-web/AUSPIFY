@@ -77,3 +77,9 @@ The screenshots below were recaptured from the revised prototype. Earlier eviden
 ## Product imagery refresh · 22 November 2026
 
 The six fictional products use generated photo-style imagery with small and full-size WebP sources. New captures show the [desktop catalog](screenshots/05-catalog.jpg), [phone catalog](screenshots/05-catalog-mobile.jpg), [product detail](screenshots/05-detail.jpg) and [bag](screenshots/05-bag.jpg). Browser checks verified image loading, the catalog photo opening the correct product, the bag thumbnail and $210 sample total, and completion of the sample checkout on the phone layout. Participant testing is still pending.
+
+## Interface polish · 22 November 2026
+
+Catalog cards align their actions when product titles wrap on small screens. At 320 px and 390 px, the first row stayed aligned and the actions met the 44 px tap target.
+
+- [05-catalog-mobile.jpg](screenshots/05-catalog-mobile.jpg)

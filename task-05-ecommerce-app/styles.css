@@ -17,3 +17,17 @@ button:disabled { opacity: .45; cursor: default; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+.grid > article { display: flex; flex-direction: column; min-width: 0; }
+.product-meta { flex: 1; }
+.product-actions { align-items: stretch; }
+@media (max-width: 600px) {
+  .product-actions > :is(button, a) {
+    display: grid;
+    place-items: center;
+    min-height: 44px;
+    padding: 8px 5px;
+    text-align: center;
+    line-height: 1.2;
+  }
+}
