@@ -233,3 +233,29 @@ tbody th { min-width: 135px; font-weight: 800; }
   .research-table-wrap table { table-layout: fixed; width: 100%; }
   .research-table-wrap th, .research-table-wrap td { overflow-wrap: anywhere; }
 }
+
+.handoff-summary { padding-block: 44px 12px; }
+.handoff-summary h2, .decision-compare h3 { margin: 0 0 16px; }
+.handoff-flow, .decision-screens {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.handoff-flow { grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: decimal inside; }
+.handoff-flow li, .decision-screens figure {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid #d5e4e2;
+  border-radius: 10px;
+  background: #fff;
+  min-width: 0;
+}
+.handoff-flow li::marker { color: #086d68; font-weight: 700; }
+.handoff-flow span, .decision-screens figcaption span { display: block; margin-top: 4px; color: #425a63; }
+.decision-compare { margin-top: 32px; }
+.decision-screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.decision-screens img { display: block; width: min(100%, 275px); height: auto; margin: 16px auto 0; border-radius: 8px; }
+@media (max-width: 650px) {
+  .handoff-flow, .decision-screens { grid-template-columns: 1fr; }
+}

@@ -50,6 +50,15 @@
       </div>
     </section>
 
+    <section class="section shell handoff-summary" aria-labelledby="handoff-heading">
+      <h2 id="handoff-heading">How the demo hands off a request</h2>
+      <ol class="handoff-flow">
+        <li><strong>Patient</strong><span>Creates a sample request and follows its status.</span></li>
+        <li><strong>Hospital</strong><span>Reviews the request, accepts it and assigns a sample vehicle.</span></li>
+        <li><strong>Traffic</strong><span>Acknowledges the route alert. Arrival is recorded separately.</span></li>
+      </ol>
+    </section>
+
     <section class="section shell" id="research">
       <div class="section-heading"><p class="section-number">01 / DISCOVERY</p><h2>Start with the service that already exists.</h2></div>
       <div class="research-layout">
@@ -93,6 +102,19 @@
           <ol><li><strong>Locate</strong><span>Confirm the pickup point.</span></li><li><strong>Describe</strong><span>Choose a category and add contact details.</span></li><li><strong>Review</strong><span>Check before sending.</span></li><li><strong>Wait</strong><span>See delivery and acceptance status.</span></li><li><strong>Act</strong><span>Track the proposed handoff or call 112.</span></li></ol>
         </div>
         <figure class="wireframe-board"><a href="./wireframes.svg"><img src="./wireframes.svg" alt="Six low fidelity screens covering patient intake, hospital dispatch, traffic acknowledgement, review, waiting, and failure recovery" loading="lazy"></a><figcaption>Original editable SVG wireframes. <a href="./wireframes.svg">Open the full board</a>.</figcaption></figure>
+        <section class="decision-compare" aria-labelledby="decision-heading">
+          <h3 id="decision-heading">Design decision: make the next step clear while waiting</h3>
+          <div class="decision-screens">
+            <figure>
+              <figcaption><strong>Before · Early wireframe</strong><span>One waiting screen describes the proposed next steps.</span></figcaption>
+              <a href="./images/waiting-wireframe.webp"><img src="./images/waiting-wireframe.webp" alt="Early grayscale screen headed Finding available help, with a waiting indicator and proposed next steps." width="390" height="933" loading="lazy" decoding="async"></a>
+            </figure>
+            <figure>
+              <figcaption><strong>After · Refined mobile prototype</strong><span>The no-response state explains that no provider has accepted and offers clear options.</span></figcaption>
+              <a href="./images/waiting-refined.webp"><img src="./images/waiting-refined.webp" alt="Refined screen headed Still waiting for a response, with call, retry and review options." width="390" height="800" loading="lazy" decoding="async"></a>
+            </figure>
+          </div>
+        </section>
         <div class="journey"><h3>Three-role service journey</h3><ol><li><strong>Patient</strong><span>Create a sample request.</span></li><li><strong>Hospital</strong><span>Review, accept, and assign a vehicle.</span></li><li><strong>Traffic</strong><span>Acknowledge the route alert.</span></li><li><strong>Patient</strong><span>Read the current handoff.</span></li><li><strong>Complete</strong><span>Retain the completed details.</span></li></ol></div>
       </div>
     </section>

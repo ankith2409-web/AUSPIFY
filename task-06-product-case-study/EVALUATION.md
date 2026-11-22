@@ -79,3 +79,10 @@ The screenshots below were recaptured from the revised prototype. Earlier eviden
 - [06-clear-confirmation.jpg](screenshots/06-clear-confirmation.jpg)
 - [06-completed-mobile.jpg](screenshots/06-completed-mobile.jpg)
 - [06-completed.jpg](screenshots/06-completed.jpg)
+
+## Interface polish · 22 November 2026
+
+The case study now introduces the three-role handoff before the research section and shows an actual early wireframe alongside the refined no-response screen. These are design iterations; participant testing and firsthand validation remain outstanding.
+
+- [06-handoff-overview.jpg](screenshots/06-handoff-overview.jpg)
+- [06-design-comparison.jpg](screenshots/06-design-comparison.jpg)
