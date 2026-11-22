@@ -2,3 +2,19 @@
 
 
 .call{display:grid;place-items:center}.optional{font-weight:400}.design-link{display:inline-block;margin-top:24px;text-decoration:underline;color:#a8e2dc}.screen-inner h2:focus{outline:none}.field [aria-invalid=true]{border-color:var(--red);border-width:2px}.app-footer a{display:flex;justify-content:center;align-items:center;gap:6px;min-height:44px}.illustration:after{content:"+"}.form-error{font-weight:650}.form-error[hidden]{display:none}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.start-form .actions { margin-top: 16px; }
+.start-form .primary, .start-form .call { min-height: 48px; }
+.start-form .call {
+  border-color: #aa4540;
+  color: #8b2928;
+  background: #fff8f6;
+}
+@media (max-width: 600px) {
+  .screen-inner:has(.start-form) { padding-top: 18px; }
+  .screen-inner:has(.start-form) .lead { margin-bottom: 12px; }
+  .screen-inner:has(.start-form) .notice { margin-bottom: 14px; }
+  .illustration { height: 96px; margin: 16px 0 0; }
+  .illustration::before { height: 74px; width: 88px; }
+  .illustration::after { top: 26px; left: calc(52% + 35px); }
+}

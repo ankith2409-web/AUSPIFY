@@ -79,3 +79,9 @@ The screenshots below were recaptured from the revised prototype. Earlier eviden
 - [06-mobile-no-response.jpg](evidence/06-mobile-no-response.jpg)
 - [08-mobile-start.jpg](evidence/08-mobile-start.jpg)
 - [11-small-mobile-start.jpg](evidence/11-small-mobile-start.jpg)
+
+## Interface polish · 22 November 2026
+
+The sample request and emergency call controls now appear before the decorative ambulance. Both actions were verified in the first 320 px and 390 px phone viewports.
+
+- [03-primary-actions-mobile.jpg](evidence/03-primary-actions-mobile.jpg)
