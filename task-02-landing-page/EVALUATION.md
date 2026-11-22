@@ -70,3 +70,10 @@ The screenshots below were recaptured from the revised prototype. Earlier eviden
 - [02-mobile-375.jpg](screenshots/02-mobile-375.jpg)
 - [03-mobile-320.jpg](screenshots/03-mobile-320.jpg)
 - [04-preview.jpg](screenshots/04-preview.jpg)
+
+## Interface polish · 22 November 2026
+
+The landing page hero uses a real screenshot of the linked patient walkthrough. Its primary action is visible in the first phone viewport.
+
+- [02-hero-desktop.jpg](screenshots/02-hero-desktop.jpg)
+- [02-hero-mobile.jpg](screenshots/02-hero-mobile.jpg)
