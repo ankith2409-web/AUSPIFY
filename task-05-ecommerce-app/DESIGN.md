@@ -19,7 +19,7 @@ Design a small e-commerce app whose customer can understand an object and its to
 ## Design decisions
 
 - Serif titles and restrained olive actions suit a homeware collection; the main task remains visible without gradients or decorative dashboard widgets.
-- Original vector illustrations keep a consistent catalog. They are illustrations, not product photography or evidence of real stock.
+- Generated photo-style product images use a consistent warm studio palette, with visible material texture and complete objects in square crops. They depict fictional catalog items.
 - Shipping is disclosed on the detail and summary screens. A $300 subtotal receives complimentary shipping; otherwise the illustrative charge is $18.
 - Filtering, sorting and quantity changes retain focus after rendering. Quantity controls have a 44 px minimum target and announce the result.
 - Required fields reject whitespace-only text. Error borders identify the affected controls and the message directs attention to the first field needing correction.
@@ -32,7 +32,7 @@ Design a small e-commerce app whose customer can understand an object and its to
 | --- | --- | --- |
 | Bag → checkout discarded entered values | Keep an in-memory draft across navigation | Enter sample email and address, go back and return |
 | Quantity change left focus on the body | Restore a relevant quantity control or heading | Keyboard focus after increase and after removal |
-| Product artwork was not a navigation target | Link the catalog illustration to detail | Open a product through the illustration |
+| Product artwork was not a navigation target | Link the catalog photo to detail | Open a product through the photo |
 | Small quantity controls and hidden delivery threshold | 44 px targets and explicit shipping rule | Inspect bag and detail at desktop and narrow sizes |
 | Required wireframes and screenshot evidence missing | Add source board and current live captures | Open wireframes.svg and screenshots/ |
 

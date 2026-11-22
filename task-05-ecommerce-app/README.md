@@ -13,7 +13,7 @@ Reference: page 10 of `UI_UX DEVELOPMENT TASK LIST(1).pdf`; shared evaluation cr
 | Required workflow | Evidence | Status |
 | --- | --- | --- |
 | User journeys and wireframes | DESIGN.md journey/recovery map; editable original wireframes.svg | Delivered |
-| Listing and detail screens | Six products; original vector illustrations, filters, sorting and specifications | Delivered |
+| Listing and detail screens | Six products; photo-style product imagery, filters, sorting and specifications | Delivered |
 | Cart and checkout | Quantity/removal, totals, shipping rule, validation and explicit sample confirmation | Delivered |
 | Interactive prototypes | Original HTML, CSS and JavaScript, deployed on Vercel | Delivered |
 | Conduct usability testing | Ready-to-run USABILITY-TEST.md and empty participant-results.csv | **Actual sessions pending** |
@@ -39,3 +39,5 @@ npx --yes serve task-05-ecommerce-app -l 8765
 Open `http://localhost:8765`. From this folder, serve `.` instead. There is no build step or project dependency installation. This avoids relying on the Windows `py` launcher.
 
 Source, editable SVG wireframes and real completed-screen screenshots are included for submission. The brief discusses design tools but does not require an exclusive export format. EVALUATION.md maps all seven criteria to actual evidence and remaining gaps; no inaccessible Figma file is claimed as verified.
+
+Catalog images are generated concept imagery, stored locally as WebP. Each product has a full image and a smaller thumbnail for narrow layouts and the bag.

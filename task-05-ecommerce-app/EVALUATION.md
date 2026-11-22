@@ -12,7 +12,7 @@ Reference: the full 13-page `UI_UX DEVELOPMENT TASK LIST(1).pdf`; Task 5 workflo
 | Code Quality | Original dependency-free source, validated stored quantities, centralized totals and in-memory checkout draft; syntax check passed | Reviewed within prototype scope |
 | Website Responsiveness | Desktop and direct 390 × 844 px viewport checks; earlier 337 px CSS-width zoom checks | Checked catalog and checkout without horizontal overflow; physical devices untested |
 | User Interface Design | Consistent type, clear field labels, visible error borders, focus recovery, shipping policy and 44 px quantity targets | Internally reviewed; customer comprehension unmeasured |
-| Creativity & Implementation | Original vector catalog and coherent fictional homeware identity with working interaction states | Delivered; no conversion or uniqueness claims |
+| Creativity & Implementation | Consistent photo-style catalog and coherent fictional homeware identity with working interaction states | Delivered; no conversion or uniqueness claims |
 | Professional Presentation | README, DESIGN.md, editable SVG, actual screenshots and honest study status | Delivered |
 | Project Functionality | Discovery → detail → bag → checkout → sample confirmation and recovery | Passed recorded internal checks |
 
@@ -24,7 +24,7 @@ Live URL: https://auspify-task-05.vercel.app/. Chromium-based browser using the 
 | --- | --- | --- |
 | Page identity, meaningful content and no framework error overlay | Correct catalog and interactive screens rendered | Pass |
 | Filter/sort | Decor sorted ascending starts with Glass Vase | Pass |
-| Image navigation | Product illustration opens the matching detail | Pass |
+| Image navigation | Product image opens the matching detail | Pass |
 | Quantity/focus | Quantity and summary update; focus stays on increase | Pass |
 | Totals/shipping | Two vases: $192 + $18 = $210; earlier four-vase check made shipping complimentary at $384 | Pass |
 | Empty checkout | Required-field errors appear and focus moves to email | Pass |
@@ -73,3 +73,7 @@ The screenshots below were recaptured from the revised prototype. Earlier eviden
 - [05-checkout-mobile.jpg](screenshots/05-checkout-mobile.jpg)
 - [05-checkout.jpg](screenshots/05-checkout.jpg)
 - [05-validation.jpg](screenshots/05-validation.jpg)
+
+## Product imagery refresh · 22 November 2026
+
+The six fictional products use generated photo-style imagery with small and full-size WebP sources. New captures show the [desktop catalog](screenshots/05-catalog.jpg), [phone catalog](screenshots/05-catalog-mobile.jpg), [product detail](screenshots/05-detail.jpg) and [bag](screenshots/05-bag.jpg). Browser checks verified image loading, the catalog photo opening the correct product, the bag thumbnail and $210 sample total, and completion of the sample checkout on the phone layout. Participant testing is still pending.
