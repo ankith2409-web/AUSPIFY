@@ -81,3 +81,10 @@ The screenshots below were recaptured from the revised prototype. Earlier eviden
 - [07-mobile-register.jpg](evidence/07-mobile-register.jpg)
 - [11-small-mobile-register.jpg](evidence/11-small-mobile-register.jpg)
 - [12-tablet-register.jpg](evidence/12-tablet-register.jpg)
+
+## Interface polish · 22 November 2026
+
+The incident register and CSV preview show date range, status, facility, and search together. Browser checks verified the January Riverside General selection produces an 11-record export.
+
+- [04-csv-preview.jpg](evidence/04-csv-preview.jpg)
+- [04-csv-preview-mobile.jpg](evidence/04-csv-preview-mobile.jpg)

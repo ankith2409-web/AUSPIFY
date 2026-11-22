@@ -12,6 +12,18 @@ const facilityFilter = () => {
   return `<label><span class="sr-only">Filter by facility</span><select id="facility"><option value="">All facilities</option>${names.map(name => `<option${name === selection.facility ? ' selected' : ''}>${clean(name)}</option>`).join('')}</select></label>`;
 };
 const filters = () => `<div class="controls"><label class="search-field"><span class="sr-only">Search incidents</span><input id="search" type="search" placeholder="Search ID, category, area or facility" value="${clean(selection.query)}"></label><label><span class="sr-only">Filter by status</span><select id="status">${['All statuses',...D.statuses].map(value => `<option${value === selection.status ? ' selected' : ''}>${value}</option>`).join('')}</select></label>${facilityFilter()}<button class="secondary" id="clear">Clear filters</button></div>`;
+
+function selectionSummary() {
+  const fields = [
+    ['Date range', D.ranges[selection.period].label],
+    ['Status', selection.status],
+    ['Facility', selection.facility || 'All facilities'],
+    ['Search', selection.query.trim() || 'None'],
+  ];
+  return `<dl class="selection-summary" aria-label="Current filters">${fields.map(([label, value]) =>
+    `<div><dt>${label}</dt><dd>${clean(value)}</dd></div>`).join('')}</dl>`;
+}
+
 function table(records, caption = 'Fictional incident records') {
   if (!records.length) return '<div class="empty"><h3>No matching incidents</h3><p>Try another search, facility, status, or time range.</p><button class="secondary" id="empty-clear">Clear filters</button></div>';
   const columns = ['Incident ID','Status','Category','Priority','Origin area','Assigned facility','Response time','Created'];
@@ -29,7 +41,7 @@ function register() {
   const filtered = rows(), count = filtered.length, pages = Math.max(1,Math.ceil(count / pageSize));
   pageNumber = Math.min(pageNumber,pages);
   const start = (pageNumber - 1) * pageSize;
-  return `${title('Incidents','Find a record, inspect its details, then return to your selection.')}${filters()}<section class="panel"><div class="panel-header"><div><h2>Incident register</h2><p id="result-count">${count} of ${cohort().length} records match / newest first</p></div><a class="text-link" href="#reports">Export selection &#8594;</a></div>${table(filtered.slice(start,start + pageSize))}${count ? `<div class="pagination"><button class="secondary" id="previous"${pageNumber === 1 ? ' disabled' : ''}>Previous</button><span>Page ${pageNumber} of ${pages} / ${start+1}-${Math.min(start+pageSize,count)} of ${count}</span><button class="secondary" id="next"${pageNumber === pages ? ' disabled' : ''}>Next</button></div>` : ''}</section>`;
+  return `${title('Incidents','Find a record, inspect its details, then return to your selection.')}${filters()}<section class="panel"><div class="panel-header"><div><h2>Incident register</h2><p id="result-count">${count} of ${cohort().length} records match / newest first</p></div><a class="text-link" href="#reports">Export selection &#8594;</a></div>${selectionSummary()}${table(filtered.slice(start,start + pageSize))}${count ? `<div class="pagination"><button class="secondary" id="previous"${pageNumber === 1 ? ' disabled' : ''}>Previous</button><span>Page ${pageNumber} of ${pages} / ${start+1}-${Math.min(start+pageSize,count)} of ${count}</span><button class="secondary" id="next"${pageNumber === pages ? ' disabled' : ''}>Next</button></div>` : ''}</section>`;
 }
 function facilities() {
   const records = cohort(), assigned = records.filter(i => i.facility !== 'Unassigned').length;
@@ -37,7 +49,7 @@ function facilities() {
 }
 function reports() {
   const count = rows().length;
-  return `${title('Reports','Export the complete filtered selection, including every result page.')}${filters()}<div class="report-layout"><section class="panel"><h2>Incident selection</h2><p class="explanation">${count} of ${cohort().length} records / ${D.ranges[selection.period].label}<br>Status: ${selection.status}<br>Facility: ${clean(selection.facility || 'All facilities')}<br>Search: ${clean(selection.query.trim() || 'None')}</p><button class="primary" id="export"${count ? '' : ' disabled'}>Download ${count} records as CSV</button><a class="text-link report-back" href="#incidents">Review selected records &#8594;</a></section><p class="notice">Generated in your browser from invented sample records. Waiting records have no assigned facility or response time. This is an archived design demonstration.</p></div>`;
+  return `${title('Reports','Export the complete filtered selection, including every result page.')}${filters()}<div class="report-layout"><section class="panel"><h2>CSV preview</h2><p class="explanation">${count} of ${cohort().length} records in the selected date range will be included.</p>${selectionSummary()}<button class="primary" id="export"${count ? '' : ' disabled'}>Download ${count} records as CSV</button><a class="text-link report-back" href="#incidents">Review selected records &#8594;</a></section><p class="notice">Generated in your browser from invented sample records. Waiting records have no assigned facility or response time. This is an archived design demonstration.</p></div>`;
 }
 function detail(id) {
   const record = D.incidents.find(i => i.id === id);

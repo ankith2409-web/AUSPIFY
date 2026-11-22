@@ -5,3 +5,19 @@
 
 
 .table-hint{display:none}@media(max-width:760px){.table-hint{display:block;color:var(--muted);font-size:12px;margin:8px 0}.controls{flex-wrap:wrap}.controls select{max-width:100%}}
+
+.selection-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 12px 0 20px;
+  background: #eef4f3;
+  border: 1px solid #d6e4e3;
+  border-radius: 8px;
+}
+.selection-summary > div { padding: 10px 14px; min-width: 0; }
+.selection-summary dt { color: #41585e; font-size: 12px; }
+.selection-summary dd { margin: 3px 0 0; color: #102c3a; font-weight: 650; overflow-wrap: anywhere; }
+.report-layout #export { width: 100%; }
+@media (max-width: 760px) {
+  .selection-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
