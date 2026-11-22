@@ -20,3 +20,10 @@ Task 05 remains incomplete against the required usability-testing step: no parti
 [Task 03 live prototype](https://auspify-task-03.vercel.app/) · [Task 04 live dashboard](https://auspify-task-04.vercel.app/) · [Task 05 live prototype](https://auspify-task-05.vercel.app/) · [Task 06 live demo](https://auspify-task-06.vercel.app/) · [Task 06 case study](https://auspify-task-06.vercel.app/case-study.html)
 
 THE SAVIOUR projects are design concepts. Their sample states do not connect to real emergency services. The published Task 03–06 links were checked directly. Repository source, evaluation checklists, and screenshots accompany the live prototypes.
+
+## Usability review PDFs
+
+- [Usability review and follow-up](docs/usability/usability-review.pdf) — findings and design changes across all six tasks.
+- [Three persona walkthroughs](docs/usability/three-persona-walkthroughs.pdf) — hypothetical scenarios and questions for future usability testing.
+
+These documents summarize internal review work. No participant sessions were conducted.
