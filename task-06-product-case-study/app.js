@@ -58,7 +58,7 @@ const views = {
     ${heading("Request details", "Only share what is needed for this request.")}
     <form id="request-form">
       <div class="app-field"><label for="pickup">Pickup location</label><input id="pickup" name="location" required maxlength="120" autocomplete="street-address" value="${escapeHtml(state.location)}"></div>
-      <div class="app-field"><label for="contact">Contact number</label><input id="contact" name="contact" required type="tel" inputmode="tel" pattern="[0-9+() .-]{7,20}" title="Enter a phone number using 7 to 20 digits or standard phone symbols" value="${escapeHtml(state.contact)}"></div>
+      <div class="app-field"><label for="contact">Contact number</label><input id="contact" name="contact" required type="tel" inputmode="tel" pattern="[0-9+\\(\\) .\\-]{7,20}" title="Enter a phone number using 7 to 20 digits or standard phone symbols" value="${escapeHtml(state.contact)}"></div>
       <div class="app-field"><label for="context">Optional landmark or context</label><textarea id="context" name="note" maxlength="240" placeholder="Example: Gate 2, near the bus stop">${escapeHtml(state.note)}</textarea></div>
       ${note(`Selected: <strong>${escapeHtml(state.category)}</strong>. Details stay in this browser session only.`)}
       <div class="app-actions"><button type="submit" class="app-button">Review request</button>${button("Back", "start", true)}${callLink}</div>
