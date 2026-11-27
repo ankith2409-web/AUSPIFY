@@ -2,14 +2,14 @@
 
 Each task has its own folder and branch. This default branch is the directory; use the links below to review the source and design artifacts.
 
-| Task | Project folder | Branch |
-| --- | --- | --- |
-| 01 · Mobile app wireframes | [Wireframes, walkthrough, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/01-mobile-wireframes/task-01-mobile-wireframes) | `task/01-mobile-wireframes` |
-| 02 · Landing page UI | [Responsive page, design system, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/02-landing-page/task-02-landing-page) | `task/02-landing-page` |
-| 03 · Mobile app prototype | [Patient journey, flow diagram, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/03-mobile-prototype/task-03-mobile-prototype) | `task/03-mobile-prototype` |
-| 04 · Dashboard UI/UX | [Dashboard, research, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/04-dashboard/task-04-dashboard) | `task/04-dashboard` |
-| 05 · E-commerce app UI/UX | [Form & Field shopping prototype](https://github.com/ankith2409-web/AUSPIFY/tree/task/05-ecommerce-app/task-05-ecommerce-app) | `task/05-ecommerce-app` |
-| 06 · Product design case study | [Local demo, case study and tests](https://github.com/ankith2409-web/AUSPIFY/tree/task/06-product-case-study/task-06-product-case-study) | `task/06-product-case-study` |
+| Task | Project folder | Branch | Live site |
+| --- | --- | --- | --- |
+| 01 · Mobile app wireframes | [Wireframes, walkthrough, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/01-mobile-wireframes/task-01-mobile-wireframes) | `task/01-mobile-wireframes` | [Open Task 1](https://auspify-task-01.vercel.app/) |
+| 02 · Landing page UI | [Responsive page, design system, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/02-landing-page/task-02-landing-page) | `task/02-landing-page` | [Open Task 2](https://auspify-task-02.vercel.app/) |
+| 03 · Mobile app prototype | [Patient journey, flow diagram, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/03-mobile-prototype/task-03-mobile-prototype) | `task/03-mobile-prototype` | [Open Task 3](https://auspify-task-03.vercel.app/) |
+| 04 · Dashboard UI/UX | [Dashboard, research, screenshots and evaluation](https://github.com/ankith2409-web/AUSPIFY/tree/task/04-dashboard/task-04-dashboard) | `task/04-dashboard` | [Open Task 4](https://auspify-task-04.vercel.app/) |
+| 05 · E-commerce app UI/UX | [Form & Field shopping prototype](https://github.com/ankith2409-web/AUSPIFY/tree/task/05-ecommerce-app/task-05-ecommerce-app) | `task/05-ecommerce-app` | [Open Task 5](https://auspify-task-05.vercel.app/) |
+| 06 · Product design case study | [Local demo, case study and tests](https://github.com/ankith2409-web/AUSPIFY/tree/task/06-product-case-study/task-06-product-case-study) | `task/06-product-case-study` | [Open Task 6](https://auspify-task-06.vercel.app/) · [Case study](https://auspify-task-06.vercel.app/case-study.html) |
 
 ## Latest review
 
