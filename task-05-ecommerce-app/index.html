@@ -17,7 +17,13 @@
   <header class="site-header">
     <a class="brand" href="#/" aria-label="Form and Field home">FORM <span>&</span> FIELD</a>
     <nav aria-label="Main navigation"><a href="#/" id="shop-link">Shop</a><a href="#/about">About</a></nav>
-    <button class="bag-link" type="button" id="cart-button" aria-label="Open bag">Bag <span id="bag-count">0</span></button>
+    <button class="bag-link" type="button" id="cart-button" aria-label="Open bag, 0 items">
+      <svg class="bag-icon" width="22" height="24" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M5 8.5h14l1.5 15H3.5l1.5-15Z"></path>
+        <path d="M8 9V6a4 4 0 0 1 8 0v3"></path>
+      </svg>
+      Bag <span class="bag-count" id="bag-count" aria-hidden="true">0</span>
+    </button>
   </header>
   <p id="storage-note" class="storage-note" role="status" hidden>Browser storage is unavailable. Your bag works in this page but cannot be saved or shared across tabs.</p>
   <main id="main" tabindex="-1"></main>
